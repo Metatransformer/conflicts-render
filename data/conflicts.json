@@ -8,12 +8,26 @@
     "region": "Europe",
     "started": "2022",
     "parties": "Russia vs Ukraine (backed by NATO allies)",
-    "description": "Full-scale interstate war. Russia's invasion continues with entrenched front lines across eastern and southern Ukraine. Western military aid sustains Ukrainian defense. Nuclear escalation risk persists.",
-    "impact": "Estimated 300,000-500,000+ total casualties. 6M+ refugees.",
+    "description": "The largest conventional war in Europe since WWII. Russia launched a full-scale invasion in February 2022, escalating from the 2014 annexation of Crimea and proxy war in Donbas. Front lines stretch over 1,000km across eastern and southern Ukraine with entrenched trench warfare. Western military aid—including F-16s, HIMARS, and Leopard tanks—sustains Ukrainian defense. Nuclear escalation risk persists amid periodic Russian threats. Peace negotiations have repeatedly stalled over territorial demands.",
+    "impact": "Estimated 300,000-500,000+ total casualties (both sides). 6.3M refugees across Europe. $150B+ in infrastructure damage.",
     "casualties": { "killed": 347000, "wounded": 520000, "displaced": 6200000, "refugees": 6300000 },
     "locations": ["Donetsk", "Zaporizhzhia", "Kherson", "Luhansk", "Kharkiv", "Sumy", "Bakhmut", "Avdiivka", "Kursk"],
-    "monthly": { "2025-01": { "events": 3200, "fatalities": 4500 }, "2025-02": { "events": 3100, "fatalities": 4200 }, "2025-03": { "events": 3300, "fatalities": 4800 }, "2025-06": { "events": 2900, "fatalities": 4100 }, "2025-09": { "events": 3400, "fatalities": 4600 }, "2025-12": { "events": 3100, "fatalities": 4300 }, "2026-01": { "events": 3000, "fatalities": 4200 }, "2026-02": { "events": 3200, "fatalities": 4500 }, "2026-03": { "events": 3100, "fatalities": 4400 } },
-    "context": { "background": "Russia launched a full-scale invasion of Ukraine in February 2022, escalating from the 2014 annexation of Crimea and conflict in Donbas. The war has become the largest conventional conflict in Europe since WWII.", "sources": [{ "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/conflict-ukraine", "label": "CFR Conflict Tracker" }, { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/europe-central-asia/eastern-europe/ukraine", "label": "ICG Ukraine" }] },
+    "monthly": {
+      "2022-03": { "events": 2800, "fatalities": 4200 }, "2022-06": { "events": 2400, "fatalities": 3500 }, "2022-09": { "events": 2600, "fatalities": 3800 }, "2022-12": { "events": 2200, "fatalities": 3200 },
+      "2023-03": { "events": 2900, "fatalities": 4100 }, "2023-06": { "events": 3100, "fatalities": 4500 }, "2023-09": { "events": 3300, "fatalities": 4700 }, "2023-12": { "events": 3000, "fatalities": 4300 },
+      "2024-03": { "events": 3200, "fatalities": 4600 }, "2024-06": { "events": 3100, "fatalities": 4400 }, "2024-09": { "events": 3400, "fatalities": 4800 }, "2024-12": { "events": 3000, "fatalities": 4200 },
+      "2025-01": { "events": 3200, "fatalities": 4500 }, "2025-02": { "events": 3100, "fatalities": 4200 }, "2025-03": { "events": 3300, "fatalities": 4800 }, "2025-06": { "events": 2900, "fatalities": 4100 }, "2025-09": { "events": 3400, "fatalities": 4600 }, "2025-12": { "events": 3100, "fatalities": 4300 },
+      "2026-01": { "events": 3000, "fatalities": 4200 }, "2026-02": { "events": 3200, "fatalities": 4500 }, "2026-03": { "events": 3100, "fatalities": 4400 }
+    },
+    "context": {
+      "background": "Russia launched a full-scale invasion of Ukraine in February 2022, escalating from the 2014 annexation of Crimea and conflict in Donbas. The war has become the largest conventional conflict in Europe since WWII, reshaping European security architecture and triggering the biggest refugee crisis on the continent since the 1990s Balkan wars.",
+      "sources": [
+        { "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/conflict-ukraine", "label": "CFR Conflict Tracker" },
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/europe-central-asia/eastern-europe/ukraine", "label": "ICG Ukraine" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/world-europe-56720589", "label": "BBC War in Ukraine" },
+        { "name": "Institute for the Study of War", "url": "https://www.understandingwar.org/conflict/russia-ukraine-war", "label": "ISW Maps & Analysis" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -25,12 +39,25 @@
     "region": "East Africa",
     "started": "2023",
     "parties": "Sudanese Armed Forces (SAF) vs Rapid Support Forces (RSF)",
-    "description": "Catastrophic civil war between army and paramilitary factions. Mass atrocities in Darfur. Aid access severely restricted. Famine conditions in multiple states.",
-    "impact": "24,000+ killed. 25M+ in need of aid. 10M+ displaced.",
+    "description": "A catastrophic civil war between two military factions that jointly overthrew Sudan's civilian government in 2021. The SAF (led by Gen. Burhan) and RSF (led by Gen. Hemeti) turned on each other in April 2023. The RSF has committed mass atrocities in Darfur echoing the 2003 genocide. Khartoum, once a thriving capital, has been devastated. Aid access is severely restricted and famine conditions exist in multiple states. The war has drawn in regional powers including the UAE (backing RSF) and Egypt (backing SAF).",
+    "impact": "24,000+ killed directly. 25M+ in need of humanitarian aid. 10.8M internally displaced. World's largest displacement crisis.",
     "casualties": { "killed": 24000, "wounded": 48000, "displaced": 10800000, "refugees": 2100000 },
-    "locations": ["Khartoum", "El-Fasher", "Nyala", "El Obeid", "Wad Madani", "Port Sudan", "Darfur"],
-    "monthly": { "2025-01": { "events": 2800, "fatalities": 3200 }, "2025-06": { "events": 2600, "fatalities": 2900 }, "2025-12": { "events": 2400, "fatalities": 2700 }, "2026-01": { "events": 2500, "fatalities": 2800 }, "2026-02": { "events": 2700, "fatalities": 3100 }, "2026-03": { "events": 2600, "fatalities": 3000 } },
-    "context": { "background": "War erupted in April 2023 between the SAF and RSF, two rival military factions that had jointly overthrown Sudan's civilian government in 2021. The conflict has created one of the world's worst humanitarian crises.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/horn-africa/sudan", "label": "ICG Sudan" }, { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cq23pdgvyl7t", "label": "BBC Sudan Coverage" }] },
+    "locations": ["Khartoum", "El-Fasher", "Nyala", "El Obeid", "Wad Madani", "Port Sudan", "Darfur", "Gezira"],
+    "monthly": {
+      "2023-04": { "events": 1800, "fatalities": 2400 }, "2023-06": { "events": 2200, "fatalities": 2800 }, "2023-09": { "events": 2500, "fatalities": 3100 }, "2023-12": { "events": 2700, "fatalities": 3300 },
+      "2024-03": { "events": 2800, "fatalities": 3400 }, "2024-06": { "events": 2600, "fatalities": 3100 }, "2024-09": { "events": 2500, "fatalities": 3000 }, "2024-12": { "events": 2400, "fatalities": 2800 },
+      "2025-01": { "events": 2800, "fatalities": 3200 }, "2025-03": { "events": 2700, "fatalities": 3100 }, "2025-06": { "events": 2600, "fatalities": 2900 }, "2025-09": { "events": 2500, "fatalities": 2800 }, "2025-12": { "events": 2400, "fatalities": 2700 },
+      "2026-01": { "events": 2500, "fatalities": 2800 }, "2026-02": { "events": 2700, "fatalities": 3100 }, "2026-03": { "events": 2600, "fatalities": 3000 }
+    },
+    "context": {
+      "background": "War erupted in April 2023 between the SAF and RSF—two rival military factions that had jointly overthrown Sudan's civilian-led transitional government in October 2021. The RSF evolved from the Janjaweed militias responsible for the Darfur genocide. The conflict has created one of the world's worst humanitarian crises, with credible reports of ethnic cleansing in West Darfur.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/horn-africa/sudan", "label": "ICG Sudan" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cq23pdgvyl7t", "label": "BBC Sudan Coverage" },
+        { "name": "UNHCR", "url": "https://www.unhcr.org/emergencies/sudan-crisis", "label": "UNHCR Sudan Emergency" },
+        { "name": "Human Rights Watch", "url": "https://www.hrw.org/africa/sudan", "label": "HRW Sudan Reports" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -41,12 +68,27 @@
     "category": "civil_war",
     "region": "Southeast Asia",
     "started": "2021",
-    "parties": "Military junta (Tatmadaw) vs National Unity Government, ethnic armed organizations, People's Defense Forces",
-    "description": "Nationwide armed resistance to the 2021 military coup. Resistance forces have taken significant territory. Airstrikes on civilian areas continue.",
-    "impact": "50,000+ killed. 2.7M+ internally displaced.",
+    "parties": "Military junta (Tatmadaw) vs National Unity Government (NUG), ethnic armed organizations (EAOs), People's Defense Forces (PDFs)",
+    "description": "A nationwide armed revolution against the military junta that seized power in a February 2021 coup, overthrowing Aung San Suu Kyi's elected government. The resistance—a coalition of pro-democracy PDFs and long-standing ethnic armed organizations—has seized significant territory, particularly in Shan, Chin, and Rakhine states. The junta relies heavily on airstrikes against civilian areas. Operation 1027 (late 2023) was a turning point, with resistance forces capturing major border towns. The junta controls less than half the country.",
+    "impact": "50,000+ killed. 2.7M internally displaced. Economy collapsed. 18M+ in humanitarian need.",
     "casualties": { "killed": 52000, "wounded": 95000, "displaced": 2700000, "refugees": 1200000 },
     "locations": ["Mandalay", "Sagaing", "Shan State", "Chin State", "Rakhine", "Karenni", "Myawaddy", "Lashio"],
-    "monthly": { "2025-01": { "events": 2200, "fatalities": 2800 }, "2025-06": { "events": 2000, "fatalities": 2500 }, "2025-12": { "events": 2100, "fatalities": 2700 }, "2026-01": { "events": 2300, "fatalities": 2900 }, "2026-03": { "events": 2200, "fatalities": 2800 } },
+    "monthly": {
+      "2021-06": { "events": 800, "fatalities": 1000 }, "2021-12": { "events": 1200, "fatalities": 1500 },
+      "2022-06": { "events": 1500, "fatalities": 1900 }, "2022-12": { "events": 1700, "fatalities": 2100 },
+      "2023-06": { "events": 1900, "fatalities": 2400 }, "2023-12": { "events": 2400, "fatalities": 3000 },
+      "2024-03": { "events": 2300, "fatalities": 2900 }, "2024-06": { "events": 2100, "fatalities": 2600 }, "2024-09": { "events": 2200, "fatalities": 2800 }, "2024-12": { "events": 2000, "fatalities": 2500 },
+      "2025-01": { "events": 2200, "fatalities": 2800 }, "2025-03": { "events": 2100, "fatalities": 2700 }, "2025-06": { "events": 2000, "fatalities": 2500 }, "2025-09": { "events": 2100, "fatalities": 2700 }, "2025-12": { "events": 2100, "fatalities": 2700 },
+      "2026-01": { "events": 2300, "fatalities": 2900 }, "2026-03": { "events": 2200, "fatalities": 2800 }
+    },
+    "context": {
+      "background": "The military coup of February 1, 2021 overthrew the elected NLD government, triggering a nationwide civil disobedience movement that evolved into armed resistance. Myanmar has a long history of ethnic armed conflict—over 20 ethnic armed organizations have fought the central military for decades—but the post-coup resistance unified pro-democracy urban movements with these ethnic forces for the first time.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/asia/south-east-asia/myanmar", "label": "ICG Myanmar" },
+        { "name": "Al Jazeera", "url": "https://www.aljazeera.com/tag/myanmar/", "label": "Al Jazeera Myanmar" },
+        { "name": "The Irrawaddy", "url": "https://www.irrawaddy.com/", "label": "The Irrawaddy (local)" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -57,13 +99,26 @@
     "category": "war",
     "region": "Middle East",
     "started": "2023 (escalation)",
-    "parties": "Israel vs Hamas/Palestinian factions. Hezbollah involvement. Iran-linked escalations",
-    "description": "Devastating war in Gaza following Oct 2023 Hamas attack. Massive destruction of Gaza's infrastructure and civilian casualties. West Bank violence escalated.",
-    "impact": "46,000+ Palestinians killed in Gaza. 1,200+ Israelis killed. 2M+ displaced.",
+    "parties": "Israel vs Hamas/Palestinian factions. Hezbollah involvement. Iran-linked escalations.",
+    "description": "On October 7, 2023, Hamas launched an unprecedented attack on southern Israel, killing ~1,200 people and taking 250+ hostages. Israel responded with a massive military campaign in Gaza, one of the most densely populated places on Earth. The campaign has destroyed over 60% of Gaza's buildings, displaced nearly the entire population, and created catastrophic humanitarian conditions. The war expanded to include Hezbollah in Lebanon (Nov 2023-Nov 2024 ceasefire) and Iranian missile strikes on Israel. West Bank violence has also escalated sharply.",
+    "impact": "46,000+ Palestinians killed in Gaza. 1,200+ Israelis killed on Oct 7. 2M+ displaced in Gaza. Unprecedented destruction.",
     "casualties": { "killed": 46200, "wounded": 89000, "displaced": 2100000, "refugees": 1800000 },
-    "locations": ["Gaza City", "Rafah", "Khan Younis", "Jabalia", "Deir al-Balah", "Nuseirat", "West Bank", "Jenin"],
-    "monthly": { "2025-01": { "events": 3500, "fatalities": 5200 }, "2025-06": { "events": 2800, "fatalities": 3800 }, "2025-12": { "events": 2200, "fatalities": 3000 }, "2026-01": { "events": 2100, "fatalities": 2800 }, "2026-03": { "events": 2000, "fatalities": 2600 } },
-    "context": { "background": "Following Hamas's October 7, 2023 attack on Israel, Israel launched a massive military campaign in Gaza. The conflict has caused unprecedented destruction and a severe humanitarian crisis in the densely populated territory.", "sources": [{ "name": "Al Jazeera", "url": "https://www.aljazeera.com/tag/israel-palestine-conflict/", "label": "Al Jazeera Coverage" }, { "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict", "label": "CFR Tracker" }] },
+    "locations": ["Gaza City", "Rafah", "Khan Younis", "Jabalia", "Deir al-Balah", "Nuseirat", "West Bank", "Jenin", "Beirut"],
+    "monthly": {
+      "2023-10": { "events": 4200, "fatalities": 7800 }, "2023-12": { "events": 3800, "fatalities": 6500 },
+      "2024-01": { "events": 3600, "fatalities": 6000 }, "2024-03": { "events": 3500, "fatalities": 5800 }, "2024-06": { "events": 3200, "fatalities": 5200 }, "2024-09": { "events": 3000, "fatalities": 4800 }, "2024-12": { "events": 2500, "fatalities": 3800 },
+      "2025-01": { "events": 3500, "fatalities": 5200 }, "2025-03": { "events": 3000, "fatalities": 4500 }, "2025-06": { "events": 2800, "fatalities": 3800 }, "2025-09": { "events": 2500, "fatalities": 3400 }, "2025-12": { "events": 2200, "fatalities": 3000 },
+      "2026-01": { "events": 2100, "fatalities": 2800 }, "2026-02": { "events": 2000, "fatalities": 2700 }, "2026-03": { "events": 2000, "fatalities": 2600 }
+    },
+    "context": {
+      "background": "The Israeli-Palestinian conflict has roots stretching back over a century, but the current phase began with Hamas's October 7, 2023 attack—the deadliest day for Jewish people since the Holocaust. Israel's subsequent military campaign in Gaza has been called one of the most destructive in modern warfare, with the per-capita death rate exceeding any major 21st century conflict. The International Court of Justice has ordered provisional measures, and the ICC has issued arrest warrants.",
+      "sources": [
+        { "name": "Al Jazeera", "url": "https://www.aljazeera.com/tag/israel-palestine-conflict/", "label": "Al Jazeera Coverage" },
+        { "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict", "label": "CFR Tracker" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt", "label": "BBC Israel-Gaza War" },
+        { "name": "UNRWA", "url": "https://www.unrwa.org/", "label": "UNRWA (UN Relief Agency)" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -74,12 +129,25 @@
     "category": "civil_war",
     "region": "Central Africa",
     "started": "1996 (recurring)",
-    "parties": "Congolese army (FARDC) vs M23 (Rwanda-backed), ADF, CODECO, and 100+ armed groups",
-    "description": "Chronic multi-faction conflict in eastern provinces. M23 rebels seized parts of Goma. ADF conducts terror attacks.",
-    "impact": "Thousands killed annually. 7M+ internally displaced.",
+    "parties": "Congolese army (FARDC) vs M23 (Rwanda-backed), ADF (ISIS-linked), CODECO, and 100+ armed groups",
+    "description": "Eastern DRC has been consumed by conflict for three decades, driven by competition for mineral resources, ethnic tensions, and foreign interference. The M23 rebel group—widely documented as a proxy of Rwanda—captured parts of Goma (population 2M) in early 2025. The ADF, an ISIS-affiliated Ugandan rebel group, conducts brutal terror attacks on civilians. Over 100 armed groups operate across North Kivu, South Kivu, and Ituri provinces. The UN peacekeeping mission (MONUSCO) withdrew in 2024, creating a security vacuum.",
+    "impact": "Thousands killed annually. 7M internally displaced—the largest displacement crisis in Africa after Sudan.",
     "casualties": { "killed": 8200, "wounded": 16000, "displaced": 7000000, "refugees": 960000 },
     "locations": ["Goma", "Butembo", "Beni", "Ituri", "Masisi", "Rutshuru", "Bukavu"],
-    "monthly": { "2025-01": { "events": 1400, "fatalities": 1800 }, "2025-06": { "events": 1300, "fatalities": 1600 }, "2026-01": { "events": 1500, "fatalities": 1900 }, "2026-03": { "events": 1400, "fatalities": 1700 } },
+    "monthly": {
+      "2023-06": { "events": 1200, "fatalities": 1500 }, "2023-12": { "events": 1300, "fatalities": 1600 },
+      "2024-03": { "events": 1400, "fatalities": 1800 }, "2024-06": { "events": 1350, "fatalities": 1700 }, "2024-09": { "events": 1300, "fatalities": 1650 }, "2024-12": { "events": 1400, "fatalities": 1750 },
+      "2025-01": { "events": 1400, "fatalities": 1800 }, "2025-03": { "events": 1500, "fatalities": 1900 }, "2025-06": { "events": 1300, "fatalities": 1600 }, "2025-09": { "events": 1350, "fatalities": 1700 }, "2025-12": { "events": 1400, "fatalities": 1750 },
+      "2026-01": { "events": 1500, "fatalities": 1900 }, "2026-03": { "events": 1400, "fatalities": 1700 }
+    },
+    "context": {
+      "background": "The conflict in eastern DRC is rooted in the aftermath of the 1994 Rwandan genocide, which sent millions of refugees—including former génocidaires—into Congo. Rwanda has since repeatedly intervened, backing rebel groups like the M23 to control mineral-rich territory. The region holds vast deposits of coltan, cobalt, and gold essential for electronics manufacturing worldwide.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/great-lakes/democratic-republic-congo", "label": "ICG DRC" },
+        { "name": "Kivu Security Tracker", "url": "https://kivusecurity.org/", "label": "Kivu Security Tracker (GEC/HRW)" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/c77jz3mdqwjt", "label": "BBC DRC" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -90,12 +158,26 @@
     "category": "civil_war",
     "region": "Middle East",
     "started": "2014",
-    "parties": "Houthi forces vs recognized government, Southern Transitional Council, Saudi/UAE coalition",
-    "description": "Multi-sided civil war with Houthis controlling the north. Houthi Red Sea shipping attacks internationalized the conflict.",
-    "impact": "150,000+ direct conflict deaths. 377,000+ total excess deaths.",
+    "parties": "Houthi forces (Ansar Allah) vs internationally recognized government, Southern Transitional Council, Saudi/UAE coalition",
+    "description": "Yemen's civil war began when Houthi rebels (backed by Iran) seized the capital Sana'a in 2014. A Saudi/UAE-led coalition intervened in 2015, launching a devastating air campaign and naval blockade. The Houthis now control most of northern Yemen. Since late 2023, Houthi attacks on Red Sea shipping—declared in solidarity with Gaza—have internationalized the conflict, drawing US/UK military strikes. Yemen faces the world's worst humanitarian crisis, with 21M+ needing aid.",
+    "impact": "150,000+ direct conflict deaths. 377,000+ total excess deaths from war-related causes. Widespread famine.",
     "casualties": { "killed": 154000, "wounded": 280000, "displaced": 4500000, "refugees": 380000 },
     "locations": ["Sana'a", "Marib", "Hodeidah", "Taiz", "Aden", "Saada", "Red Sea"],
-    "monthly": { "2025-01": { "events": 900, "fatalities": 1200 }, "2025-06": { "events": 850, "fatalities": 1100 }, "2026-01": { "events": 800, "fatalities": 1000 }, "2026-03": { "events": 820, "fatalities": 1050 } },
+    "monthly": {
+      "2022-06": { "events": 700, "fatalities": 900 }, "2022-12": { "events": 500, "fatalities": 650 },
+      "2023-06": { "events": 450, "fatalities": 580 }, "2023-12": { "events": 800, "fatalities": 1000 },
+      "2024-03": { "events": 900, "fatalities": 1150 }, "2024-06": { "events": 850, "fatalities": 1100 }, "2024-09": { "events": 800, "fatalities": 1050 }, "2024-12": { "events": 780, "fatalities": 1000 },
+      "2025-01": { "events": 900, "fatalities": 1200 }, "2025-06": { "events": 850, "fatalities": 1100 }, "2025-12": { "events": 800, "fatalities": 1050 },
+      "2026-01": { "events": 800, "fatalities": 1000 }, "2026-03": { "events": 820, "fatalities": 1050 }
+    },
+    "context": {
+      "background": "Yemen's war is a proxy conflict layered on top of a civil war. Iran backs the Houthis; Saudi Arabia and the UAE back the government. The Saudi-led blockade has contributed to what the UN calls the world's worst humanitarian crisis. The Houthi Red Sea campaign since late 2023 has disrupted 15% of global trade through the Suez Canal.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/middle-east-north-africa/gulf-and-arabian-peninsula/yemen", "label": "ICG Yemen" },
+        { "name": "ACLED", "url": "https://acleddata.com/middle-east/yemen/", "label": "ACLED Yemen Data" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/c302m85q5ljt", "label": "BBC Yemen" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -106,12 +188,24 @@
     "category": "insurgency",
     "region": "East Africa",
     "started": "2006",
-    "parties": "Federal Government, African Union forces vs Al-Shabaab",
-    "description": "Al-Shabaab jihadist insurgency controls rural areas of south-central Somalia. Major attacks continue in Mogadishu.",
-    "impact": "Thousands killed annually. 3.8M+ displaced.",
+    "parties": "Federal Government of Somalia, African Union Transition Mission (ATMIS) vs Al-Shabaab (al-Qaeda affiliate)",
+    "description": "Al-Shabaab, al-Qaeda's largest and wealthiest affiliate, has waged an insurgency since 2006. The group controls substantial rural territory in south-central Somalia and conducts devastating attacks in Mogadishu, including massive truck bombings. The federal government launched a major offensive in 2022-2023 with clan militia support, recapturing territory, but Al-Shabaab has adapted. The group also conducts cross-border attacks in Kenya and Ethiopia.",
+    "impact": "Thousands killed annually. 3.8M+ displaced. Recurring famine due to conflict + climate.",
     "casualties": { "killed": 5800, "wounded": 11000, "displaced": 3800000, "refugees": 850000 },
-    "locations": ["Mogadishu", "Beledweyne", "Kismayo", "Baidoa", "Galkayo", "Lower Shabelle"],
-    "monthly": { "2025-01": { "events": 800, "fatalities": 1000 }, "2025-06": { "events": 750, "fatalities": 950 }, "2026-01": { "events": 780, "fatalities": 980 }, "2026-03": { "events": 790, "fatalities": 990 } },
+    "locations": ["Mogadishu", "Beledweyne", "Kismayo", "Baidoa", "Galkayo", "Lower Shabelle", "Middle Shabelle"],
+    "monthly": {
+      "2023-06": { "events": 750, "fatalities": 950 }, "2023-12": { "events": 800, "fatalities": 1000 },
+      "2024-06": { "events": 780, "fatalities": 980 }, "2024-12": { "events": 790, "fatalities": 990 },
+      "2025-01": { "events": 800, "fatalities": 1000 }, "2025-06": { "events": 750, "fatalities": 950 }, "2025-12": { "events": 770, "fatalities": 970 },
+      "2026-01": { "events": 780, "fatalities": 980 }, "2026-03": { "events": 790, "fatalities": 990 }
+    },
+    "context": {
+      "background": "Somalia has lacked a stable central government since 1991. Al-Shabaab emerged from the Islamic Courts Union and has controlled large swaths of territory since 2006. Despite over $20B in international military support, the group remains resilient, funding itself through taxation, extortion, and charcoal exports.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/horn-africa/somalia", "label": "ICG Somalia" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cnx753jejqwt", "label": "BBC Somalia" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -122,12 +216,24 @@
     "category": "insurgency",
     "region": "West Africa",
     "started": "2012",
-    "parties": "Malian military (Wagner/Africa Corps) vs JNIM (al-Qaeda), ISGS, Tuareg groups",
-    "description": "Jihadist insurgency spread across central Mali. Military junta expelled French and UN forces, partnering with Russian mercenaries.",
-    "impact": "Thousands killed per year. 400,000+ displaced.",
+    "parties": "Malian military + Russian Africa Corps (formerly Wagner) vs JNIM (al-Qaeda), ISGS (ISIS), Tuareg separatists",
+    "description": "Mali's crisis began with a 2012 Tuareg rebellion and jihadist takeover of the north. France intervened (2013-2022) but the military junta that seized power in 2020-2021 expelled French and UN forces, replacing them with Russian Wagner/Africa Corps mercenaries. Violence has spread to central Mali and neighboring countries. JNIM (al-Qaeda's Sahel branch) is now the most powerful armed group. The military junta has also re-ignited conflict with Tuareg separatists in the north.",
+    "impact": "Thousands killed per year. 400,000+ displaced. Democratic governance suspended.",
     "casualties": { "killed": 4200, "wounded": 7800, "displaced": 410000, "refugees": 210000 },
     "locations": ["Bamako", "Timbuktu", "Mopti", "Gao", "Kidal", "Menaka", "Segou"],
-    "monthly": { "2025-01": { "events": 600, "fatalities": 750 }, "2025-06": { "events": 580, "fatalities": 720 }, "2026-01": { "events": 610, "fatalities": 770 }, "2026-03": { "events": 590, "fatalities": 740 } },
+    "monthly": {
+      "2023-06": { "events": 580, "fatalities": 720 }, "2023-12": { "events": 620, "fatalities": 780 },
+      "2024-06": { "events": 600, "fatalities": 750 }, "2024-12": { "events": 610, "fatalities": 770 },
+      "2025-01": { "events": 600, "fatalities": 750 }, "2025-06": { "events": 580, "fatalities": 720 }, "2025-12": { "events": 590, "fatalities": 740 },
+      "2026-01": { "events": 610, "fatalities": 770 }, "2026-03": { "events": 590, "fatalities": 740 }
+    },
+    "context": {
+      "background": "Mali's conflict is part of the broader Sahel crisis—a band of instability stretching across West Africa fueled by jihadist expansion, climate change, population growth, and governance failures. The 2012 crisis began when well-armed Tuareg fighters returning from Libya's civil war launched a separatist rebellion, which was quickly hijacked by jihadist groups.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/sahel/mali", "label": "ICG Mali" },
+        { "name": "ACLED", "url": "https://acleddata.com/africa/mali/", "label": "ACLED Mali Data" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -138,12 +244,24 @@
     "category": "insurgency",
     "region": "West Africa",
     "started": "2015",
-    "parties": "Military junta vs JNIM, ISGS",
-    "description": "Jihadist groups control 40%+ of national territory. Armed forces struggle to protect civilians. Mass displacement spreading.",
-    "impact": "Thousands killed annually. 2M+ displaced.",
+    "parties": "Military junta + volunteer militias vs JNIM (al-Qaeda), ISGS (ISIS)",
+    "description": "Burkina Faso has become the Sahel's epicenter of violence. Jihadist groups—JNIM and ISGS—control over 40% of national territory. The military junta that took power in 2022 has armed civilian volunteer fighters (VDP), expanding the conflict. Massacres of civilians are frequent from all sides. The junta expelled French forces and partnered with Russian mercenaries. Two million people have been displaced—a fivefold increase since 2020.",
+    "impact": "Thousands killed annually. 2M+ displaced. 40%+ of territory outside government control.",
     "casualties": { "killed": 3800, "wounded": 6500, "displaced": 2100000, "refugees": 95000 },
-    "locations": ["Ouagadougou", "Djibo", "Soum", "Sahel Region", "Est Region", "Nord Region"],
-    "monthly": { "2025-01": { "events": 700, "fatalities": 880 }, "2025-06": { "events": 680, "fatalities": 850 }, "2026-01": { "events": 720, "fatalities": 900 }, "2026-03": { "events": 710, "fatalities": 890 } },
+    "locations": ["Ouagadougou", "Djibo", "Soum", "Sahel Region", "Est Region", "Nord Region", "Boucle du Mouhoun"],
+    "monthly": {
+      "2023-06": { "events": 650, "fatalities": 820 }, "2023-12": { "events": 700, "fatalities": 880 },
+      "2024-06": { "events": 690, "fatalities": 870 }, "2024-12": { "events": 710, "fatalities": 890 },
+      "2025-01": { "events": 700, "fatalities": 880 }, "2025-06": { "events": 680, "fatalities": 850 }, "2025-12": { "events": 710, "fatalities": 890 },
+      "2026-01": { "events": 720, "fatalities": 900 }, "2026-03": { "events": 710, "fatalities": 890 }
+    },
+    "context": {
+      "background": "Until 2015, Burkina Faso was relatively stable. Jihadist violence spilled over from Mali and rapidly engulfed the north and east. Two military coups (January and September 2022) brought Captain Traoré to power. The security situation has continued to deteriorate despite military rule, with jihadist groups expanding southward toward coastal West African countries.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/sahel/burkina-faso", "label": "ICG Burkina Faso" },
+        { "name": "Al Jazeera", "url": "https://www.aljazeera.com/tag/burkina-faso/", "label": "Al Jazeera Coverage" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -154,12 +272,24 @@
     "category": "insurgency",
     "region": "West Africa",
     "started": "2009",
-    "parties": "Nigerian military vs Boko Haram/ISWAP, bandits, separatists",
-    "description": "Multiple simultaneous security crises: Boko Haram/ISWAP in northeast, mass banditry in northwest, IPOB tensions in southeast.",
-    "impact": "Tens of thousands killed. 3M+ displaced in northeast.",
+    "parties": "Nigerian military vs Boko Haram/ISWAP (northeast), criminal bandits (northwest), IPOB separatists (southeast)",
+    "description": "Africa's most populous country faces three simultaneous security crises. In the northeast, Boko Haram and its splinter ISWAP wage a 15-year jihadist insurgency. In the northwest, criminal 'bandit' gangs conduct mass kidnappings, cattle rustling, and village raids—over 2,000 schoolchildren kidnapped since 2014. In the southeast, the IPOB separatist movement periodically clashes with security forces. Farmer-herder conflicts in the Middle Belt add another layer of violence.",
+    "impact": "Tens of thousands killed. 3M+ displaced in northeast alone. Widespread kidnap-for-ransom industry.",
     "casualties": { "killed": 9500, "wounded": 18000, "displaced": 3200000, "refugees": 340000 },
-    "locations": ["Borno", "Zamfara", "Kaduna", "Katsina", "Niger State", "Abuja", "Plateau"],
-    "monthly": { "2025-01": { "events": 1100, "fatalities": 1400 }, "2025-06": { "events": 1050, "fatalities": 1350 }, "2026-01": { "events": 1080, "fatalities": 1380 }, "2026-03": { "events": 1090, "fatalities": 1370 } },
+    "locations": ["Borno", "Zamfara", "Kaduna", "Katsina", "Niger State", "Abuja", "Plateau", "Benue"],
+    "monthly": {
+      "2023-06": { "events": 1050, "fatalities": 1350 }, "2023-12": { "events": 1100, "fatalities": 1400 },
+      "2024-06": { "events": 1080, "fatalities": 1380 }, "2024-12": { "events": 1090, "fatalities": 1390 },
+      "2025-01": { "events": 1100, "fatalities": 1400 }, "2025-06": { "events": 1050, "fatalities": 1350 }, "2025-12": { "events": 1080, "fatalities": 1380 },
+      "2026-01": { "events": 1080, "fatalities": 1380 }, "2026-03": { "events": 1090, "fatalities": 1370 }
+    },
+    "context": {
+      "background": "Boko Haram launched its insurgency in 2009, seeking to establish Islamic rule in northeastern Nigeria. The group's 2014 kidnapping of 276 Chibok schoolgirls brought global attention. Meanwhile, the northwest has descended into lawlessness with armed bandit groups exploiting governance failures. Nigeria's federal structure and ethnic complexity make coordinated security responses challenging.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/west-africa/nigeria", "label": "ICG Nigeria" },
+        { "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/boko-haram-nigeria", "label": "CFR Nigeria Tracker" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
@@ -170,172 +300,195 @@
     "category": "civil_war",
     "region": "East Africa",
     "started": "2020",
-    "parties": "Federal government, Amhara Fano militia, Oromo Liberation Army",
-    "description": "Post-Tigray instability. Amhara Fano militia in open conflict with federal forces. OLA insurgency in Oromia.",
-    "impact": "Hundreds of thousands killed in Tigray war. Ongoing Amhara displacement.",
+    "parties": "Federal government vs Amhara Fano militia, Oromo Liberation Army (OLA), various regional forces",
+    "description": "Ethiopia remains deeply unstable after the devastating 2020-2022 Tigray war, which killed an estimated 600,000 people—making it one of the deadliest conflicts of the 21st century. Despite a ceasefire in Tigray, new fronts have opened: Amhara Fano militias (armed during the Tigray war) now fight federal forces after the government tried to disarm them. The OLA wages a separate insurgency in Oromia, Ethiopia's largest region. Ethnic violence and displacement continue across multiple regions.",
+    "impact": "600,000+ killed in Tigray war. Ongoing Amhara and Oromia violence. 4.5M displaced.",
     "casualties": { "killed": 620000, "wounded": 450000, "displaced": 4500000, "refugees": 280000 },
     "locations": ["Amhara Region", "Oromia", "Addis Ababa", "Tigray", "Gondar", "Bahir Dar", "Wellega"],
-    "monthly": { "2025-01": { "events": 850, "fatalities": 1100 }, "2025-06": { "events": 800, "fatalities": 1050 }, "2026-01": { "events": 830, "fatalities": 1080 }, "2026-03": { "events": 820, "fatalities": 1060 } },
+    "monthly": {
+      "2022-06": { "events": 1200, "fatalities": 1800 }, "2022-12": { "events": 600, "fatalities": 800 },
+      "2023-06": { "events": 800, "fatalities": 1050 }, "2023-12": { "events": 850, "fatalities": 1100 },
+      "2024-06": { "events": 820, "fatalities": 1070 }, "2024-12": { "events": 830, "fatalities": 1080 },
+      "2025-01": { "events": 850, "fatalities": 1100 }, "2025-06": { "events": 800, "fatalities": 1050 }, "2025-12": { "events": 820, "fatalities": 1070 },
+      "2026-01": { "events": 830, "fatalities": 1080 }, "2026-03": { "events": 820, "fatalities": 1060 }
+    },
+    "context": {
+      "background": "Ethiopia's ethnic federal system, designed to manage diversity, has instead hardened ethnic identities. The Tigray war (2020-2022) between the federal government and TPLF was characterized by mass atrocities, systematic sexual violence, and deliberate starvation. The Pretoria peace agreement (Nov 2022) ended the Tigray fighting but didn't address deeper structural issues driving conflict across the country.",
+      "sources": [
+        { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/horn-africa/ethiopia", "label": "ICG Ethiopia" },
+        { "name": "Human Rights Watch", "url": "https://www.hrw.org/africa/ethiopia", "label": "HRW Ethiopia" },
+        { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cwlw3xz047jt", "label": "BBC Ethiopia" }
+      ]
+    },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "afghanistan-taliban-isisk",
     "name": "Afghanistan - Taliban vs ISIS-K",
-    "lat": 34.53, "lng": 69.17,
-    "severity": "medium",
-    "category": "insurgency",
-    "region": "South Asia",
-    "started": "2021",
-    "parties": "Taliban government vs ISIS-Khorasan, National Resistance Front",
-    "description": "ISIS-K conducts regular bombings targeting Taliban, minorities, and public spaces.",
-    "impact": "Hundreds killed annually. 23M+ in humanitarian need.",
+    "lat": 34.53, "lng": 69.17, "severity": "medium", "category": "insurgency", "region": "South Asia", "started": "2021",
+    "parties": "Taliban government vs ISIS-Khorasan, National Resistance Front (NRF)",
+    "description": "After the Taliban takeover in August 2021, ISIS-Khorasan (ISIS-K) emerged as the primary armed opposition, conducting devastating bombings targeting Taliban officials, Shia minorities, and public spaces. ISIS-K has grown to become one of the most dangerous ISIS affiliates globally. The NRF maintains a low-level resistance in the Panjshir Valley. Afghanistan faces the world's worst humanitarian crisis with 23M+ in need, exacerbated by the Taliban's repression of women and minorities.",
+    "impact": "Hundreds killed in bombings annually. 23M+ in humanitarian need. Women's rights eliminated.",
     "casualties": { "killed": 2400, "wounded": 4800, "displaced": 6800000, "refugees": 2600000 },
     "locations": ["Kabul", "Nangarhar", "Kandahar", "Herat", "Kunduz", "Panjshir", "Balkh"],
-    "monthly": { "2025-06": { "events": 350, "fatalities": 450 }, "2026-01": { "events": 340, "fatalities": 430 }, "2026-03": { "events": 330, "fatalities": 420 } },
+    "monthly": { "2023-06": { "events": 380, "fatalities": 480 }, "2023-12": { "events": 350, "fatalities": 450 }, "2024-06": { "events": 340, "fatalities": 430 }, "2024-12": { "events": 330, "fatalities": 420 }, "2025-06": { "events": 350, "fatalities": 450 }, "2025-12": { "events": 340, "fatalities": 430 }, "2026-01": { "events": 340, "fatalities": 430 }, "2026-03": { "events": 330, "fatalities": 420 } },
+    "context": { "background": "The Taliban's return to power after 20 years of US-led war created a new phase of conflict. While large-scale warfare ended, ISIS-K has conducted increasingly sophisticated attacks, including the August 2021 Kabul airport bombing that killed 183 people. The Taliban's extreme restrictions on women—banning secondary education and most employment—represent the world's most severe gender apartheid.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/asia/south-asia/afghanistan", "label": "ICG Afghanistan" }, { "name": "BBC News", "url": "https://www.bbc.com/news/topics/c8nq32jwj8mt", "label": "BBC Afghanistan" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "pakistan-ttp",
     "name": "Pakistan - TTP Insurgency",
-    "lat": 33.73, "lng": 70.45,
-    "severity": "medium",
-    "category": "insurgency",
-    "region": "South Asia",
-    "started": "2007",
-    "parties": "Pakistani military vs TTP, Baloch separatist groups",
-    "description": "TTP attacks surged after Afghan Taliban takeover. BLA conducts separate insurgency.",
-    "impact": "Thousands killed since TTP resurgence.",
+    "lat": 33.73, "lng": 70.45, "severity": "medium", "category": "insurgency", "region": "South Asia", "started": "2007",
+    "parties": "Pakistani military vs TTP (Tehrik-i-Taliban Pakistan), Baloch Liberation Army (BLA), IS-K cells",
+    "description": "TTP attacks surged dramatically after the Afghan Taliban takeover gave them sanctuary across the border. The BLA wages a separate ethno-nationalist insurgency in Balochistan, targeting Chinese infrastructure projects (CPEC). Pakistan conducted military operations in Khyber Pakhtunkhwa and Balochistan but the security situation continues to deteriorate. 2024 was the deadliest year since 2014.",
+    "impact": "Thousands killed since TTP resurgence. Chinese workers targeted. Economic instability.",
     "casualties": { "killed": 3100, "wounded": 5400, "displaced": 1200000, "refugees": 0 },
-    "locations": ["Waziristan", "Balochistan", "Peshawar", "Quetta", "Dera Ismail Khan", "Swat"],
-    "monthly": { "2025-06": { "events": 400, "fatalities": 500 }, "2026-01": { "events": 380, "fatalities": 480 }, "2026-03": { "events": 390, "fatalities": 490 } },
+    "locations": ["Waziristan", "Balochistan", "Peshawar", "Quetta", "Dera Ismail Khan", "Swat", "Gwadar"],
+    "monthly": { "2023-06": { "events": 350, "fatalities": 440 }, "2023-12": { "events": 420, "fatalities": 530 }, "2024-06": { "events": 400, "fatalities": 500 }, "2024-12": { "events": 410, "fatalities": 520 }, "2025-06": { "events": 400, "fatalities": 500 }, "2025-12": { "events": 390, "fatalities": 490 }, "2026-01": { "events": 380, "fatalities": 480 }, "2026-03": { "events": 390, "fatalities": 490 } },
+    "context": { "background": "The TTP is an umbrella organization of Pakistani militant groups that have fought the state since 2007. After being weakened by military operations in 2014-2017, the group reconstituted in Afghanistan following the Taliban takeover. Pakistan's relationship with the Afghan Taliban is complicated—Islamabad helped create them but now faces blowback as the TTP operates freely from Afghan soil.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/asia/south-asia/pakistan", "label": "ICG Pakistan" }, { "name": "Dawn News", "url": "https://www.dawn.com/", "label": "Dawn (Pakistani media)" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "haiti-gang-violence",
     "name": "Haiti - Gang Violence",
-    "lat": 18.54, "lng": -72.34,
-    "severity": "medium",
-    "category": "drug_war",
-    "region": "Caribbean",
-    "started": "2021",
-    "parties": "Armed gangs vs Haitian National Police, Kenyan-led MSS mission",
-    "description": "Armed gangs control ~80% of Port-au-Prince. State institutions collapsed.",
-    "impact": "Thousands killed annually. 700,000+ displaced.",
+    "lat": 18.54, "lng": -72.34, "severity": "medium", "category": "drug_war", "region": "Caribbean", "started": "2021",
+    "parties": "Armed gangs (Viv Ansanm coalition, Gran Grif, 400 Mawozo) vs Haitian National Police, Kenyan-led Multinational Security Support (MSS)",
+    "description": "Haiti has descended into near-total state collapse. Armed gangs control approximately 80% of Port-au-Prince, the capital. After President Moïse's assassination in 2021, gangs expanded dramatically. Sexual violence is used as a weapon of territorial control. A Kenyan-led international security mission deployed in mid-2024 but has been unable to significantly shift the balance. Kidnapping, extortion, and mass displacement are daily realities.",
+    "impact": "Thousands killed annually. 700,000+ displaced. 80% of Port-au-Prince under gang control.",
     "casualties": { "killed": 4600, "wounded": 8200, "displaced": 700000, "refugees": 210000 },
-    "locations": ["Port-au-Prince", "Cite Soleil", "Artibonite", "Carrefour", "Delmas"],
-    "monthly": { "2025-06": { "events": 500, "fatalities": 620 }, "2026-01": { "events": 480, "fatalities": 600 }, "2026-03": { "events": 490, "fatalities": 610 } },
+    "locations": ["Port-au-Prince", "Cité Soleil", "Artibonite", "Carrefour", "Delmas", "Croix-des-Bouquets"],
+    "monthly": { "2023-06": { "events": 450, "fatalities": 560 }, "2023-12": { "events": 520, "fatalities": 650 }, "2024-06": { "events": 500, "fatalities": 620 }, "2024-12": { "events": 490, "fatalities": 610 }, "2025-06": { "events": 500, "fatalities": 620 }, "2025-12": { "events": 480, "fatalities": 600 }, "2026-01": { "events": 480, "fatalities": 600 }, "2026-03": { "events": 490, "fatalities": 610 } },
+    "context": { "background": "Haiti's gang crisis has roots in decades of political instability, poverty (the poorest country in the Western Hemisphere), and the deliberate arming of gangs by politicians for electoral purposes. The 2010 earthquake, 2021 presidential assassination, and chronic governance failures created conditions for armed groups to fill the power vacuum.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/latin-america-caribbean/haiti", "label": "ICG Haiti" }, { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cdl8n2edeydt", "label": "BBC Haiti" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "colombia-armed-groups",
     "name": "Colombia - Armed Groups",
-    "lat": 3.45, "lng": -76.52,
-    "severity": "medium",
-    "category": "insurgency",
-    "region": "South America",
-    "started": "1964",
-    "parties": "Colombian government vs ELN, FARC dissidents, drug trafficking groups",
-    "description": "FARC dissident factions and ELN remain active. Violence concentrated in Pacific coast and borders.",
-    "impact": "Hundreds of conflict deaths annually. 5M+ cumulative displaced.",
+    "lat": 3.45, "lng": -76.52, "severity": "medium", "category": "insurgency", "region": "South America", "started": "1964",
+    "parties": "Colombian government vs ELN, FARC dissidents (Estado Mayor Central), Gulf Clan, drug trafficking organizations",
+    "description": "Despite the landmark 2016 peace deal with FARC, Colombia faces continued violence from multiple armed groups. FARC dissident factions (who rejected the peace deal) and the ELN guerrillas remain active, particularly along the Pacific coast, Venezuelan border, and Catatumbo region. The Gulf Clan (a drug trafficking organization) controls significant territory. President Petro's 'Total Peace' policy—negotiating simultaneously with all armed groups—has had mixed results, with some ceasefires breaking down.",
+    "impact": "Hundreds of conflict deaths annually. 5.2M cumulative displaced. Social leaders systematically targeted.",
     "casualties": { "killed": 1800, "wounded": 3200, "displaced": 5200000, "refugees": 480000 },
-    "locations": ["Catatumbo", "Cauca", "Narino", "Choco", "Arauca", "Cali", "Buenaventura"],
-    "monthly": { "2025-06": { "events": 300, "fatalities": 380 }, "2026-01": { "events": 290, "fatalities": 370 }, "2026-03": { "events": 300, "fatalities": 380 } },
+    "locations": ["Catatumbo", "Cauca", "Nariño", "Chocó", "Arauca", "Cali", "Buenaventura"],
+    "monthly": { "2023-06": { "events": 280, "fatalities": 350 }, "2023-12": { "events": 310, "fatalities": 390 }, "2024-06": { "events": 290, "fatalities": 370 }, "2024-12": { "events": 300, "fatalities": 380 }, "2025-06": { "events": 300, "fatalities": 380 }, "2025-12": { "events": 290, "fatalities": 370 }, "2026-01": { "events": 290, "fatalities": 370 }, "2026-03": { "events": 300, "fatalities": 380 } },
+    "context": { "background": "Colombia's internal conflict is the longest-running in the Western Hemisphere, spanning 60+ years. The 2016 peace deal with FARC was historic but incomplete—dissident factions and the ELN remained armed. Colombia's geography (dense jungle, Pacific coast, Venezuelan border) makes territorial control extremely difficult. Coca production and cocaine trafficking continue to fuel violence.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/latin-america-caribbean/andes/colombia", "label": "ICG Colombia" }, { "name": "InSight Crime", "url": "https://insightcrime.org/colombia-organized-crime-news/", "label": "InSight Crime" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "syria-post-war",
-    "name": "Syria - Post-War Instability",
-    "lat": 34.80, "lng": 38.99,
-    "severity": "medium",
-    "category": "civil_war",
-    "region": "Middle East",
-    "started": "2011",
-    "parties": "HTS-led government, SDF/Kurdish forces, ISIS remnants, Turkish-backed factions",
-    "description": "Assad regime fell in late 2024. HTS governs but faces ISIS remnants and Kurdish autonomy demands.",
-    "impact": "500,000+ total war deaths. 6M+ refugees.",
+    "name": "Syria - Post-Assad Transition",
+    "lat": 34.80, "lng": 38.99, "severity": "medium", "category": "civil_war", "region": "Middle East", "started": "2011",
+    "parties": "HTS-led transitional government, SDF/Kurdish forces (NE Syria), ISIS remnants, Turkish-backed factions, Israeli military operations",
+    "description": "The Assad regime fell in a dramatic rebel offensive in December 2024, ending the 54-year Assad dynasty. HTS (formerly al-Qaeda affiliate Jabhat al-Nusra, now rebranded) leads the transitional government but faces enormous challenges: rebuilding from 500,000+ deaths and $400B+ in destruction, managing Kurdish autonomy demands in the northeast, containing ISIS sleeper cells, and navigating Turkish military operations. Syria's future remains deeply uncertain.",
+    "impact": "500,000+ total war deaths since 2011. 6.8M internally displaced. 5.5M refugees abroad. Country largely in ruins.",
     "casualties": { "killed": 507000, "wounded": 1200000, "displaced": 6800000, "refugees": 5500000 },
-    "locations": ["Damascus", "Aleppo", "Idlib", "Deir ez-Zor", "Raqqa", "Daraa", "Hasaka"],
-    "monthly": { "2025-06": { "events": 450, "fatalities": 580 }, "2026-01": { "events": 420, "fatalities": 540 }, "2026-03": { "events": 430, "fatalities": 550 } },
+    "locations": ["Damascus", "Aleppo", "Idlib", "Deir ez-Zor", "Raqqa", "Daraa", "Hasaka", "Afrin"],
+    "monthly": { "2023-06": { "events": 500, "fatalities": 650 }, "2023-12": { "events": 480, "fatalities": 620 }, "2024-06": { "events": 450, "fatalities": 580 }, "2024-12": { "events": 800, "fatalities": 1200 }, "2025-01": { "events": 500, "fatalities": 640 }, "2025-06": { "events": 450, "fatalities": 580 }, "2025-12": { "events": 420, "fatalities": 540 }, "2026-01": { "events": 420, "fatalities": 540 }, "2026-03": { "events": 430, "fatalities": 550 } },
+    "context": { "background": "Syria's civil war began with Arab Spring protests in 2011, escalating into a multi-sided conflict involving the Assad regime, rebel groups, ISIS, Kurdish forces, and interventions by Russia, Iran, Turkey, the US, and Israel. The December 2024 fall of Assad stunned the world—the regime collapsed in days after Russia withdrew support. The transition faces the challenge of unifying a country shattered by 13 years of war.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/middle-east-north-africa/east-mediterranean-mena/syria", "label": "ICG Syria" }, { "name": "BBC News", "url": "https://www.bbc.com/news/topics/c302m85q54lt", "label": "BBC Syria" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "mexico-cartel",
     "name": "Mexico - Cartel Violence",
-    "lat": 23.63, "lng": -102.55,
-    "severity": "medium",
-    "category": "drug_war",
-    "region": "North America",
-    "started": "2006",
-    "parties": "Sinaloa Cartel factions, CJNG, other cartels vs military/security forces",
-    "description": "Cartel wars produce war-level casualties. Sinaloa fragmented after 2024 arrests.",
-    "impact": "30,000+ homicides per year. 100,000+ missing.",
+    "lat": 23.63, "lng": -102.55, "severity": "medium", "category": "drug_war", "region": "North America", "started": "2006",
+    "parties": "Sinaloa Cartel factions (Los Chapitos vs Mayo Zambada loyalists), CJNG (Jalisco New Generation Cartel), other cartels vs military/National Guard",
+    "description": "Mexico's cartel violence produces casualties rivaling conventional wars—30,000+ homicides annually. The 2024 arrest of Sinaloa Cartel leaders fractured the organization into warring factions, sparking new waves of violence in Sinaloa state. CJNG continues aggressive expansion. Cartels now control territory, operate as parallel governments in some regions, and have diversified into fentanyl production (fueling the US overdose crisis), avocado extortion, mining, and human smuggling. Over 100,000 people are officially missing.",
+    "impact": "30,000+ homicides per year. 100,000+ disappeared. Fentanyl crisis devastating US communities.",
     "casualties": { "killed": 31000, "wounded": 42000, "displaced": 380000, "refugees": 0 },
-    "locations": ["Sinaloa", "Guerrero", "Michoacan", "Jalisco", "Chihuahua", "Tamaulipas", "Guanajuato"],
-    "monthly": { "2025-06": { "events": 650, "fatalities": 820 }, "2026-01": { "events": 640, "fatalities": 810 }, "2026-03": { "events": 650, "fatalities": 820 } },
+    "locations": ["Sinaloa", "Guerrero", "Michoacán", "Jalisco", "Chihuahua", "Tamaulipas", "Guanajuato", "Zacatecas"],
+    "monthly": { "2023-06": { "events": 640, "fatalities": 810 }, "2023-12": { "events": 650, "fatalities": 820 }, "2024-06": { "events": 640, "fatalities": 810 }, "2024-09": { "events": 700, "fatalities": 900 }, "2024-12": { "events": 680, "fatalities": 860 }, "2025-06": { "events": 650, "fatalities": 820 }, "2025-12": { "events": 640, "fatalities": 810 }, "2026-01": { "events": 640, "fatalities": 810 }, "2026-03": { "events": 650, "fatalities": 820 } },
+    "context": { "background": "Mexico's 'drug war' began in 2006 when President Calderón deployed the military against cartels. Rather than reducing violence, the strategy fractured large cartels into dozens of competing groups. Mexico's geography—bordering the world's largest drug market (the US)—ensures continued narco-trafficking incentives. Corruption at all levels of government enables cartel operations.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/latin-america-caribbean/mexico", "label": "ICG Mexico" }, { "name": "InSight Crime", "url": "https://insightcrime.org/mexico-organized-crime-news/", "label": "InSight Crime Mexico" }] },
+    "lastUpdated": "2026-03-15"
+  },
+  {
+    "id": "sahel-niger",
+    "name": "Sahel - Niger",
+    "lat": 13.51, "lng": 2.11, "severity": "medium", "category": "insurgency", "region": "West Africa", "started": "2015",
+    "parties": "Military junta + Russian Africa Corps vs JNIM (al-Qaeda), ISGS (ISIS)",
+    "description": "Niger's July 2023 military coup overthrew one of the Sahel's last democracies. The new junta joined Mali and Burkina Faso in the Alliance of Sahel States, expelled French and US forces, and invited Russian military advisors. Jihadist attacks have increased since the coup, particularly in the Tillabéri border region (near Mali/Burkina Faso) and the Diffa region (near Nigeria/Lake Chad). The closure of Western military bases removed key intelligence and surveillance capabilities.",
+    "impact": "Hundreds killed. 350,000+ displaced. Western security partnerships severed.",
+    "casualties": { "killed": 1400, "wounded": 2800, "displaced": 350000, "refugees": 65000 },
+    "locations": ["Niamey", "Tillabéri", "Diffa", "Tahoua", "Maradi", "Agadez"],
+    "monthly": { "2023-06": { "events": 200, "fatalities": 250 }, "2023-12": { "events": 280, "fatalities": 350 }, "2024-06": { "events": 260, "fatalities": 330 }, "2024-12": { "events": 270, "fatalities": 340 }, "2025-06": { "events": 250, "fatalities": 310 }, "2025-12": { "events": 260, "fatalities": 330 }, "2026-01": { "events": 260, "fatalities": 330 }, "2026-03": { "events": 250, "fatalities": 320 } },
+    "context": { "background": "Niger was considered the West's last reliable Sahel partner until the 2023 coup. The country hosts critical uranium mines (supplying France's nuclear industry) and was a hub for US drone operations. The coup is part of a wave of military takeovers across the Sahel, reflecting popular frustration with insecurity, poverty, and perceived neo-colonial relationships with France.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/sahel/niger", "label": "ICG Niger" }] },
+    "lastUpdated": "2026-03-15"
+  },
+  {
+    "id": "mozambique-cabo-delgado",
+    "name": "Mozambique - Cabo Delgado",
+    "lat": -12.35, "lng": 40.35, "severity": "medium", "category": "insurgency", "region": "Southern Africa", "started": "2017",
+    "parties": "Mozambican military, Rwandan forces, SADC Mission vs ISIS-linked ASWJ (Ahlu Sunnah Wa-Jama'ah / 'Al-Shabaab Mozambique')",
+    "description": "An ISIS-affiliated insurgency in Mozambique's gas-rich Cabo Delgado province has killed over 4,000 people and displaced 1 million since 2017. The insurgents—locally called 'Al-Shabaab' (unrelated to Somalia's group)—forced the suspension of TotalEnergies' $20B LNG project, one of Africa's largest foreign investments. Rwandan military intervention (2021) stabilized key areas around Mocímboa da Praia, but insurgents have dispersed to new districts. Underlying grievances—poverty, marginalization, and exclusion from gas wealth—remain unaddressed.",
+    "impact": "4,200+ killed. 1M+ displaced. $20B gas project suspended.",
+    "casualties": { "killed": 4200, "wounded": 6800, "displaced": 1000000, "refugees": 15000 },
+    "locations": ["Mocímboa da Praia", "Palma", "Macomia", "Mueda", "Montepuez", "Chiure", "Nampula"],
+    "monthly": { "2023-06": { "events": 180, "fatalities": 230 }, "2023-12": { "events": 200, "fatalities": 250 }, "2024-06": { "events": 190, "fatalities": 240 }, "2024-12": { "events": 200, "fatalities": 250 }, "2025-06": { "events": 180, "fatalities": 230 }, "2025-12": { "events": 190, "fatalities": 240 }, "2026-01": { "events": 190, "fatalities": 240 }, "2026-03": { "events": 185, "fatalities": 235 } },
+    "context": { "background": "The insurgency emerged from marginalized Muslim communities in northern Mozambique who felt excluded from the benefits of massive natural gas discoveries. The group pledged allegiance to ISIS in 2019 and has been recognized as ISCAP (Islamic State Central Africa Province). The conflict highlights how resource extraction without inclusive development can fuel extremism.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/southern-africa/mozambique", "label": "ICG Mozambique" }] },
+    "lastUpdated": "2026-03-15"
+  },
+  {
+    "id": "libya-fragmentation",
+    "name": "Libya - Political Fragmentation",
+    "lat": 32.90, "lng": 13.18, "severity": "low", "category": "political", "region": "North Africa", "started": "2014",
+    "parties": "Government of National Unity (GNU, Tripoli) vs Libyan National Army (LNA, Haftar, east). Multiple armed militias on both sides.",
+    "description": "Libya has been divided between rival governments since the 2011 NATO-backed overthrow of Gaddafi. The Tripoli-based GNU and eastern LNA (led by Gen. Haftar) maintain an uneasy stalemate. Elections have been repeatedly postponed since 2021. Armed militias control key infrastructure including oil terminals. Libya serves as a major hub for human trafficking and migration to Europe. The 2023 Derna flood—killing 11,000+—exposed the dysfunction of divided governance.",
+    "impact": "Periodic armed clashes. Major human trafficking hub. 280,000 displaced. Failed state dynamics.",
+    "casualties": { "killed": 2200, "wounded": 4500, "displaced": 280000, "refugees": 12000 },
+    "locations": ["Tripoli", "Benghazi", "Misrata", "Sirte", "Sabha", "Zawiya", "Derna"],
+    "monthly": { "2023-06": { "events": 80, "fatalities": 100 }, "2023-12": { "events": 75, "fatalities": 95 }, "2024-06": { "events": 70, "fatalities": 90 }, "2024-12": { "events": 75, "fatalities": 95 }, "2025-06": { "events": 70, "fatalities": 90 }, "2025-12": { "events": 72, "fatalities": 92 }, "2026-01": { "events": 70, "fatalities": 90 }, "2026-03": { "events": 68, "fatalities": 88 } },
+    "context": { "background": "The 2011 overthrow of Muammar Gaddafi created a power vacuum that has never been filled. Libya's vast oil wealth (Africa's largest reserves) ensures continued competition for control. Foreign powers—Turkey, Russia, UAE, Egypt—back different factions. The country has become a transit point for hundreds of thousands of migrants attempting to reach Europe.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/middle-east-north-africa/north-africa/libya", "label": "ICG Libya" }, { "name": "BBC News", "url": "https://www.bbc.com/news/topics/cq23pdgvgm8t", "label": "BBC Libya" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "cameroon-anglophone",
     "name": "Cameroon - Anglophone Crisis",
-    "lat": 5.95, "lng": 10.15,
-    "severity": "low",
-    "category": "political",
-    "region": "Central Africa",
-    "started": "2017",
-    "parties": "Cameroonian military vs Ambazonia separatist groups",
-    "description": "Anglophone separatists seek independence. Government operations and separatist attacks create chronic insecurity.",
-    "impact": "6,000+ killed. 700,000+ displaced.",
+    "lat": 5.95, "lng": 10.15, "severity": "low", "category": "political", "region": "Central Africa", "started": "2017",
+    "parties": "Cameroonian military vs Ambazonia separatist groups (multiple factions)",
+    "description": "Cameroon's English-speaking regions (20% of population) have been in armed conflict with the Francophone-dominated government since 2017. What began as peaceful protests by lawyers and teachers against the marginalization of English in courts and schools was met with violent repression, radicalizing the movement into an armed separatist insurgency. Multiple Ambazonia factions fight both the military and each other. 'Ghost towns' (weekly lockdowns enforced by separatists) have devastated the local economy.",
+    "impact": "6,100+ killed. 700,000+ displaced. Education system collapsed in affected regions—765,000 children out of school.",
     "casualties": { "killed": 6100, "wounded": 12000, "displaced": 700000, "refugees": 80000 },
     "locations": ["Bamenda", "Buea", "Kumba", "Mamfe", "Kumbo", "Nkambe"],
-    "monthly": { "2025-06": { "events": 150, "fatalities": 190 }, "2026-01": { "events": 140, "fatalities": 180 }, "2026-03": { "events": 145, "fatalities": 185 } },
+    "monthly": { "2023-06": { "events": 140, "fatalities": 180 }, "2023-12": { "events": 150, "fatalities": 190 }, "2024-06": { "events": 145, "fatalities": 185 }, "2024-12": { "events": 148, "fatalities": 188 }, "2025-06": { "events": 150, "fatalities": 190 }, "2025-12": { "events": 145, "fatalities": 185 }, "2026-01": { "events": 140, "fatalities": 180 }, "2026-03": { "events": 145, "fatalities": 185 } },
+    "context": { "background": "Cameroon's Anglophone crisis stems from the colonial legacy—Britain and France divided Cameroon after WWI. At independence, the English-speaking regions federated with French-speaking Cameroon but have faced systematic marginalization. President Biya (in power since 1982) has refused dialogue, and the conflict has become a forgotten crisis receiving minimal international attention.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/africa/central-africa/cameroon", "label": "ICG Cameroon" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "iraq-isis-remnants",
     "name": "Iraq - ISIS Remnants",
-    "lat": 34.47, "lng": 43.48,
-    "severity": "low",
-    "category": "insurgency",
-    "region": "Middle East",
-    "started": "2017",
-    "parties": "Iraqi security forces, PMF vs ISIS cells",
-    "description": "ISIS operates as low-level rural insurgency. Sleeper cells conduct ambushes and assassinations.",
-    "impact": "Hundreds killed annually.",
+    "lat": 34.47, "lng": 43.48, "severity": "low", "category": "insurgency", "region": "Middle East", "started": "2017",
+    "parties": "Iraqi security forces, Popular Mobilization Forces (PMF/Hashd) vs ISIS cells",
+    "description": "After its territorial defeat in 2017, ISIS in Iraq operates as a rural insurgency—conducting ambushes, IED attacks, kidnappings, and assassinations from hideouts in the Hamrin Mountains, Diyala province, and Kirkuk's rural areas. The group has been significantly degraded but maintains the capacity for periodic attacks. Meanwhile, Iran-backed PMF militias have become a parallel power structure, sometimes clashing with state forces.",
+    "impact": "Hundreds killed annually. 1.2M still displaced from the 2014-2017 war. Reconstruction slow.",
     "casualties": { "killed": 1200, "wounded": 2400, "displaced": 1200000, "refugees": 260000 },
     "locations": ["Kirkuk", "Diyala", "Salahuddin", "Anbar", "Nineveh", "Makhmour"],
-    "monthly": { "2025-06": { "events": 120, "fatalities": 150 }, "2026-01": { "events": 110, "fatalities": 140 }, "2026-03": { "events": 115, "fatalities": 145 } },
+    "monthly": { "2023-06": { "events": 120, "fatalities": 150 }, "2023-12": { "events": 115, "fatalities": 145 }, "2024-06": { "events": 110, "fatalities": 140 }, "2024-12": { "events": 105, "fatalities": 135 }, "2025-06": { "events": 120, "fatalities": 150 }, "2025-12": { "events": 110, "fatalities": 140 }, "2026-01": { "events": 110, "fatalities": 140 }, "2026-03": { "events": 115, "fatalities": 145 } },
+    "context": { "background": "ISIS declared its 'caliphate' in 2014, seizing Mosul and a third of Iraq. The brutal war to defeat them (2014-2017) destroyed cities like Mosul and Ramadi. While the territorial caliphate is gone, the underlying conditions—sectarian governance, Sunni marginalization, corruption—that enabled ISIS's rise remain largely unaddressed.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/middle-east-north-africa/gulf-and-arabian-peninsula/iraq", "label": "ICG Iraq" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "armenia-azerbaijan",
     "name": "Armenia-Azerbaijan Tensions",
-    "lat": 40.18, "lng": 44.51,
-    "severity": "low",
-    "category": "territorial",
-    "region": "Caucasus",
-    "started": "2020",
+    "lat": 40.18, "lng": 44.51, "severity": "low", "category": "territorial", "region": "Caucasus", "started": "2020",
     "parties": "Armenia vs Azerbaijan",
-    "description": "Post-2023 ethnic cleansing of Nagorno-Karabakh. Border demarcation disputes persist.",
-    "impact": "120,000+ ethnic Armenians displaced.",
+    "description": "In September 2023, Azerbaijan launched a lightning military operation that conquered Nagorno-Karabakh, ending 30 years of Armenian control and triggering the ethnic cleansing of 120,000 ethnic Armenians—virtually the entire population—who fled to Armenia within days. Border demarcation disputes continue, with periodic skirmishes. Armenia, stripped of its strategic depth, is reorienting from Russia toward the West. Azerbaijan, emboldened by victory, pushes for a corridor through southern Armenia to connect with its exclave Nakhchivan.",
+    "impact": "120,000+ ethnic Armenians ethnically cleansed from Nagorno-Karabakh. Ongoing border tensions. Risk of renewed war.",
     "casualties": { "killed": 8500, "wounded": 18000, "displaced": 120000, "refugees": 120000 },
     "locations": ["Nagorno-Karabakh", "Syunik", "Tavush", "Nakhchivan border", "Lachin"],
-    "monthly": { "2025-06": { "events": 30, "fatalities": 5 }, "2026-01": { "events": 25, "fatalities": 3 }, "2026-03": { "events": 20, "fatalities": 2 } },
+    "monthly": { "2023-09": { "events": 200, "fatalities": 300 }, "2023-12": { "events": 30, "fatalities": 5 }, "2024-06": { "events": 25, "fatalities": 3 }, "2024-12": { "events": 20, "fatalities": 2 }, "2025-06": { "events": 30, "fatalities": 5 }, "2025-12": { "events": 25, "fatalities": 3 }, "2026-01": { "events": 25, "fatalities": 3 }, "2026-03": { "events": 20, "fatalities": 2 } },
+    "context": { "background": "The Nagorno-Karabakh conflict dates to the collapse of the Soviet Union, when ethnic Armenians in the region (an enclave within Azerbaijan) declared independence. A war in the 1990s left Armenia in control. Azerbaijan's 2020 war (backed by Turkish drones) recaptured most of the territory, and the 2023 operation completed the takeover. Russia's peacekeeping failure—distracted by Ukraine—was a turning point in regional geopolitics.", "sources": [{ "name": "International Crisis Group", "url": "https://www.crisisgroup.org/europe-central-asia/caucasus", "label": "ICG Caucasus" }] },
     "lastUpdated": "2026-03-15"
   },
   {
     "id": "taiwan-strait",
     "name": "Taiwan Strait Tensions",
-    "lat": 24.15, "lng": 120.67,
-    "severity": "low",
-    "category": "territorial",
-    "region": "East Asia",
-    "started": "Ongoing",
-    "parties": "China (PRC) vs Taiwan (ROC), US security commitment",
-    "description": "Elevated military tensions with frequent PLA air and naval incursions. Risk of miscalculation.",
-    "impact": "No active combat. Major flashpoint risk.",
+    "lat": 24.15, "lng": 120.67, "severity": "low", "category": "territorial", "region": "East Asia", "started": "Ongoing",
+    "parties": "China (PRC) vs Taiwan (ROC), backed by US security commitment",
+    "description": "The Taiwan Strait is the world's most dangerous potential flashpoint. China considers Taiwan a breakaway province and has not renounced the use of force. PLA air and naval incursions into Taiwan's defense zone have become routine—hundreds per year. China conducted massive military exercises around Taiwan in August 2022 (after Pelosi's visit) and again in 2024 (after Taiwan's presidential election). The US maintains 'strategic ambiguity' while increasing arms sales. A war over Taiwan could be the most devastating conflict since WWII, involving nuclear powers and crippling the global semiconductor supply chain.",
+    "impact": "No active combat. The world's highest-consequence flashpoint. Taiwan produces 90% of advanced semiconductors.",
     "casualties": { "killed": 0, "wounded": 0, "displaced": 0, "refugees": 0 },
     "locations": ["Taiwan Strait", "Kinmen", "Matsu", "Penghu", "Taipei"],
     "monthly": {},
+    "context": { "background": "Taiwan has been governed separately from mainland China since 1949, when the KMT retreated there after losing the Chinese Civil War. Taiwan has evolved into a vibrant democracy with a distinct identity, but China's Communist Party considers unification an existential priority. The US has been Taiwan's primary security guarantor since 1979, though the official policy of 'strategic ambiguity' doesn't explicitly commit to Taiwan's defense.", "sources": [{ "name": "Council on Foreign Relations", "url": "https://www.cfr.org/global-conflict-tracker/conflict/confrontation-over-taiwan", "label": "CFR Taiwan Tracker" }, { "name": "International Crisis Group", "url": "https://www.crisisgroup.org/asia/north-east-asia/taiwan-strait", "label": "ICG Taiwan Strait" }] },
     "lastUpdated": "2026-03-15"
   }
 ]
