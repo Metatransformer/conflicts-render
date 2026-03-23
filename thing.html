@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D World Conflicts Globe - March 2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; background: #000; font-family: 'Segoe UI', Arial, sans-serif; color: #e2e8f0; }
+        canvas { display: block; cursor: grab; }
+        canvas:active { cursor: grabbing; }
+
+        /* Drag hint overlay */
+        #drag-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 200;
+            text-align: center;
+            transition: opacity 1.2s ease-out;
+        }
+        #drag-hint.hidden { opacity: 0; }
+        .drag-hint-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 12px;
+            border: 2px solid rgba(147, 197, 253, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: hintPulse 2s ease-in-out infinite;
+            background: rgba(10, 18, 35, 0.5);
+        }
+        .drag-hint-icon svg { width: 32px; height: 32px; }
+        .drag-hint-text {
+            font-size: 14px;
+            color: rgba(147, 197, 253, 0.8);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+        }
+        .drag-hint-sub {
+            font-size: 11px;
+            color: rgba(100, 116, 139, 0.8);
+            margin-top: 4px;
+        }
+        @keyframes hintPulse {
+            0%, 100% { transform: scale(1); border-color: rgba(147, 197, 253, 0.3); }
+            50% { transform: scale(1.08); border-color: rgba(147, 197, 253, 0.7); }
+        }
+        @keyframes hintSway {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(8px); }
+            75% { transform: translateX(-8px); }
+        }
+        .drag-hint-icon { animation: hintPulse 2s ease-in-out infinite, hintSway 3s ease-in-out infinite; }
+
+        /* Panel */
+        #panel {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 340px;
+            background: rgba(10, 18, 35, 0.92);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            backdrop-filter: blur(12px);
+        }
+        #panel::-webkit-scrollbar { width: 5px; }
+        #panel::-webkit-scrollbar-track { background: transparent; }
+        #panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+        #panel h1 {
+            font-size: 17px;
+            color: #93c5fd;
+            text-align: center;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 14px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .legend-item:hover { background: rgba(51, 65, 85, 0.5); }
+        .legend-item.dimmed { opacity: 0.35; }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(51, 65, 85, 0.4);
+            border: 1px solid rgba(71, 85, 105, 0.4);
+            color: #94a3b8;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            color: #e2e8f0;
+        }
+
+        #conflicts-list { list-style: none; }
+        #conflicts-list li {
+            padding: 10px 12px;
+            margin-bottom: 5px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid transparent;
+        }
+        #conflicts-list li:hover {
+            background: rgba(51, 65, 85, 0.7);
+            transform: translateX(3px);
+        }
+        #conflicts-list li.active {
+            background: rgba(59, 130, 246, 0.15);
+            border-left-color: #3b82f6;
+        }
+        .li-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .li-name { flex: 1; }
+        .li-severity {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+        }
+
+        .count-badge {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        /* Info panel */
+        #info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 18, 35, 0.95);
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: 14px;
+            width: 380px;
+            max-height: 55vh;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+        #info::-webkit-scrollbar { width: 4px; }
+        #info::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        #info-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #info-close:hover { color: #e2e8f0; }
+        #info h2 { margin: 0 0 6px 0; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+        #info-severity-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        #info-desc { margin: 8px 0; font-size: 13px; line-height: 1.5; color: #cbd5e1; }
+        .info-meta { font-size: 12px; color: #64748b; margin-top: 8px; }
+        .info-meta span { color: #94a3b8; }
+        .info-parties { margin-top: 6px; font-size: 12px; color: #94a3b8; }
+        .info-parties strong { color: #cbd5e1; }
+
+        /* Casualty stats in info panel */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .stat-box {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+        }
+        .stat-value.killed { color: #f87171; }
+        .stat-value.wounded { color: #fb923c; }
+        .stat-value.displaced { color: #fbbf24; }
+        .stat-value.refugees { color: #60a5fa; }
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Incident feed in info panel */
+        .incident-feed-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            margin: 14px 0 8px;
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+            padding-top: 10px;
+        }
+        .incident-item {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+            font-size: 12px;
+            align-items: flex-start;
+        }
+        .incident-icon {
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .incident-time {
+            flex-shrink: 0;
+            color: #475569;
+            font-size: 10px;
+            min-width: 40px;
+            padding-top: 1px;
+        }
+        .incident-text { color: #94a3b8; line-height: 1.3; }
+        .incident-text strong { color: #cbd5e1; font-weight: 500; }
+
+        /* Live ticker at bottom */
+        #ticker {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: rgba(10, 18, 35, 0.9);
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        #ticker-label {
+            background: #dc2626;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        #ticker-label::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: tickerBlink 1.5s ease-in-out infinite;
+        }
+        @keyframes tickerBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+        #ticker-content {
+            flex: 1;
+            white-space: nowrap;
+            font-size: 12px;
+            color: #94a3b8;
+            padding: 0 16px;
+            animation: tickerScroll 30s linear infinite;
+        }
+        #ticker-content strong { color: #e2e8f0; }
+        @keyframes tickerScroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .credit {
+            position: absolute;
+            bottom: 38px;
+            right: 12px;
+            color: #475569;
+            font-size: 11px;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            #panel { width: calc(100vw - 32px); max-height: 35vh; }
+            #info { width: calc(100vw - 32px); bottom: 38px; left: 10px; max-height: 40vh; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Drag hint -->
+    <div id="drag-hint">
+        <div class="drag-hint-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v0M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v6M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/>
+                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.21 0-4.27-.9-5.66-2.34L2.41 15.66a2 2 0 0 1 2.83-2.83L6 13.5"/>
+            </svg>
+        </div>
+        <div class="drag-hint-text">Drag to explore the globe</div>
+        <div class="drag-hint-sub">Scroll to zoom &middot; Click markers for details</div>
+    </div>
+
+    <div id="panel">
+        <h1>World Conflicts Globe</h1>
+        <p class="subtitle">March 2026 &middot; Live incident simulation</p>
+
+        <div class="legend" id="legend"></div>
+        <div class="filter-bar" id="filter-bar"></div>
+
+        <ul id="conflicts-list"></ul>
+        <div class="count-badge" id="count-badge"></div>
+    </div>
+
+    <div id="info">
+        <button id="info-close" onclick="document.getElementById('info').style.display='none'">&times;</button>
+        <h2>
+            <span id="info-name"></span>
+            <span id="info-severity-badge"></span>
+        </h2>
+        <p id="info-desc"></p>
+        <div id="info-stats" class="stats-grid"></div>
+        <div id="info-parties" class="info-parties"></div>
+        <div class="info-meta">
+            <div id="info-impact"></div>
+            <div id="info-started"></div>
+            <div id="info-region"></div>
+        </div>
+        <div id="info-incidents"></div>
+    </div>
+
+    <!-- Live ticker -->
+    <div id="ticker">
+        <div id="ticker-label">LIVE</div>
+        <div id="ticker-content"></div>
+    </div>
+
+    <div class="credit">Three.js &middot; Textures: Solar System Scope &middot; Data: ACLED / CFR / UCDP / Wikipedia (Mar 2026)</div>
+
+    <script>
+    // ==================== CONFLICT DATA ====================
+    const SEVERITY = {
+        critical: { color: 0xff2244, cssColor: '#ff2244', label: 'Critical', size: 0.11 },
+        high:     { color: 0xff8800, cssColor: '#ff8800', label: 'High',     size: 0.09 },
+        medium:   { color: 0xffcc00, cssColor: '#ffcc00', label: 'Medium',   size: 0.07 },
+        low:      { color: 0x66aaff, cssColor: '#66aaff', label: 'Low',      size: 0.055 }
+    };
+
+    const CATEGORIES = {
+        war: 'War', civil_war: 'Civil War', insurgency: 'Insurgency',
+        territorial: 'Territorial', political: 'Political Violence', drug_war: 'Drug/Gang War'
+    };
+
+    // Incident types with icons and templates
+    const INCIDENT_TYPES = {
+        airstrike:  { icon: '&#9992;', templates: [
+            'Airstrike reported near {loc}', 'Aerial bombardment in {loc} area', 'Air force strikes targets in {loc}'
+        ]},
+        shelling:   { icon: '&#128163;', templates: [
+            'Artillery shelling hits {loc}', 'Mortar fire reported in {loc}', 'Heavy shelling across {loc} front line'
+        ]},
+        bombing:    { icon: '&#128165;', templates: [
+            'Explosion reported in {loc}', 'IED detonated near {loc}', 'Car bomb attack in {loc}'
+        ]},
+        clash:      { icon: '&#9876;', templates: [
+            'Armed clashes erupted in {loc}', 'Firefight between factions in {loc}', 'Heavy fighting reported near {loc}'
+        ]},
+        shooting:   { icon: '&#128299;', templates: [
+            'Shooting incident in {loc}', 'Gunfire exchange in {loc}', 'Armed attack reported in {loc}'
+        ]},
+        raid:       { icon: '&#9888;', templates: [
+            'Military raid conducted in {loc}', 'Security forces raid {loc} area', 'Armed group raids village near {loc}'
+        ]},
+        displacement: { icon: '&#128694;', templates: [
+            '{n} families flee fighting near {loc}', 'Mass displacement reported from {loc}', 'Civilians evacuating {loc}'
+        ]},
+        kidnapping: { icon: '&#128275;', templates: [
+            'Kidnapping reported near {loc}', 'Mass abduction in {loc} region', 'Armed group seizes hostages in {loc}'
+        ]},
+        drone:      { icon: '&#127959;', templates: [
+            'Drone strike hits target in {loc}', 'UAV attack reported in {loc}', 'Drone bombardment in {loc} area'
+        ]}
+    };
+
+    const conflicts = [
+        // === CRITICAL ===
+        {
+            name: "Russia-Ukraine War",
+            lat: 48.38, lng: 35.04,
+            severity: "critical",
+            category: "war",
+            region: "Europe",
+            started: "2022",
+            parties: "Russia vs Ukraine (backed by NATO allies)",
+            desc: "Full-scale interstate war. Russia's invasion continues with entrenched front lines across eastern and southern Ukraine. Western military aid sustains Ukrainian defense. Nuclear escalation risk persists.",
+            impact: "Estimated 300,000-500,000+ total casualties. 6M+ refugees.",
+            casualties: { killed: 347000, wounded: 520000, displaced: 6200000, refugees: 6300000 },
+            locations: ['Donetsk', 'Zaporizhzhia', 'Kherson', 'Luhansk', 'Kharkiv', 'Sumy', 'Bakhmut', 'Avdiivka', 'Kursk'],
+            incidents: ['airstrike', 'shelling', 'drone', 'clash', 'shelling', 'shelling', 'drone', 'airstrike'],
+            incidentRate: 3200 // per month, for simulation speed
+        },
+        {
+            name: "Sudan Civil War",
+            lat: 15.50, lng: 32.56,
+            severity: "critical",
+            category: "civil_war",
+            region: "East Africa",
+            started: "2023",
+            parties: "Sudanese Armed Forces (SAF) vs Rapid Support Forces (RSF)",
+            desc: "Catastrophic civil war between army and paramilitary factions. Mass atrocities in Darfur. Aid access severely restricted. Famine conditions in multiple states.",
+            impact: "15,000+ killed. 25M+ in need of aid. 10M+ displaced.",
+            casualties: { killed: 24000, wounded: 48000, displaced: 10800000, refugees: 2100000 },
+            locations: ['Khartoum', 'El-Fasher', 'Nyala', 'El Obeid', 'Wad Madani', 'Port Sudan', 'Darfur'],
+            incidents: ['clash', 'shelling', 'airstrike', 'shooting', 'displacement', 'raid', 'shooting'],
+            incidentRate: 2800
+        },
+        {
+            name: "Myanmar Civil War",
+            lat: 19.76, lng: 96.08,
+            severity: "critical",
+            category: "civil_war",
+            region: "Southeast Asia",
+            started: "2021",
+            parties: "Military junta (Tatmadaw) vs National Unity Government, ethnic armed organizations, People's Defense Forces",
+            desc: "Nationwide armed resistance to the 2021 military coup. Resistance forces have taken significant territory. Airstrikes on civilian areas continue.",
+            impact: "50,000+ killed. 2.7M+ internally displaced.",
+            casualties: { killed: 52000, wounded: 95000, displaced: 2700000, refugees: 1200000 },
+            locations: ['Mandalay', 'Sagaing', 'Shan State', 'Chin State', 'Rakhine', 'Karenni', 'Myawaddy', 'Lashio'],
+            incidents: ['airstrike', 'clash', 'raid', 'shelling', 'clash', 'airstrike', 'displacement'],
+            incidentRate: 2200
+        },
+        {
+            name: "Gaza / Israel-Palestine",
+            lat: 31.42, lng: 34.35,
+            severity: "critical",
+            category: "war",
+            region: "Middle East",
+            started: "2023 (escalation)",
+            parties: "Israel vs Hamas/Palestinian factions. Hezbollah involvement. Iran-linked escalations",
+            desc: "Devastating war in Gaza following Oct 2023 Hamas attack. Massive destruction of Gaza's infrastructure and civilian casualties. West Bank violence escalated.",
+            impact: "40,000+ Palestinians killed in Gaza. 1,200+ Israelis killed. 2M+ displaced.",
+            casualties: { killed: 46200, wounded: 89000, displaced: 2100000, refugees: 1800000 },
+            locations: ['Gaza City', 'Rafah', 'Khan Younis', 'Jabalia', 'Deir al-Balah', 'Nuseirat', 'West Bank', 'Jenin'],
+            incidents: ['airstrike', 'airstrike', 'shelling', 'bombing', 'airstrike', 'shooting', 'drone', 'shelling'],
+            incidentRate: 3500
+        },
+
+        // === HIGH ===
+        {
+            name: "DR Congo (Eastern)",
+            lat: -1.66, lng: 29.22,
+            severity: "high",
+            category: "civil_war",
+            region: "Central Africa",
+            started: "1996 (recurring)",
+            parties: "Congolese army (FARDC) vs M23 (Rwanda-backed), ADF, CODECO, and 100+ armed groups",
+            desc: "Chronic multi-faction conflict in eastern provinces. M23 rebels seized parts of Goma. ADF conducts terror attacks. Dozens of militia groups operate with impunity.",
+            impact: "Thousands killed annually. 7M+ internally displaced.",
+            casualties: { killed: 8200, wounded: 16000, displaced: 7000000, refugees: 960000 },
+            locations: ['Goma', 'Butembo', 'Beni', 'Ituri', 'Masisi', 'Rutshuru', 'Bukavu'],
+            incidents: ['clash', 'raid', 'shooting', 'displacement', 'clash', 'kidnapping'],
+            incidentRate: 1400
+        },
+        {
+            name: "Yemen Civil War",
+            lat: 15.35, lng: 44.21,
+            severity: "high",
+            category: "civil_war",
+            region: "Middle East",
+            started: "2014",
+            parties: "Houthi forces (Ansar Allah) vs recognized government, Southern Transitional Council, Saudi/UAE coalition",
+            desc: "Multi-sided civil war with Houthis controlling the north. Houthi Red Sea shipping attacks internationalized the conflict.",
+            impact: "150,000+ direct conflict deaths. 377,000+ total excess deaths.",
+            casualties: { killed: 154000, wounded: 280000, displaced: 4500000, refugees: 380000 },
+            locations: ['Sana\'a', 'Marib', 'Hodeidah', 'Taiz', 'Aden', 'Saada', 'Red Sea'],
+            incidents: ['airstrike', 'shelling', 'clash', 'drone', 'shooting', 'shelling'],
+            incidentRate: 900
+        },
+        {
+            name: "Somalia - Al-Shabaab",
+            lat: 2.05, lng: 45.32,
+            severity: "high",
+            category: "insurgency",
+            region: "East Africa",
+            started: "2006",
+            parties: "Federal Government of Somalia, African Union forces vs Al-Shabaab",
+            desc: "Al-Shabaab jihadist insurgency controls rural areas of south-central Somalia. Major attacks continue in Mogadishu.",
+            impact: "Thousands killed annually. 3.8M+ displaced.",
+            casualties: { killed: 5800, wounded: 11000, displaced: 3800000, refugees: 850000 },
+            locations: ['Mogadishu', 'Beledweyne', 'Kismayo', 'Baidoa', 'Galkayo', 'Lower Shabelle'],
+            incidents: ['bombing', 'clash', 'shooting', 'raid', 'bombing', 'kidnapping'],
+            incidentRate: 800
+        },
+        {
+            name: "Sahel - Mali Insurgency",
+            lat: 14.60, lng: -2.50,
+            severity: "high",
+            category: "insurgency",
+            region: "West Africa",
+            started: "2012",
+            parties: "Malian military (Wagner/Africa Corps) vs JNIM (al-Qaeda), ISGS, Tuareg groups",
+            desc: "Jihadist insurgency spread across central Mali. Military junta expelled French and UN forces, partnering with Russian mercenaries.",
+            impact: "Thousands killed per year. 400,000+ displaced.",
+            casualties: { killed: 4200, wounded: 7800, displaced: 410000, refugees: 210000 },
+            locations: ['Bamako', 'Timbuktu', 'Mopti', 'Gao', 'Kidal', 'Menaka', 'Segou'],
+            incidents: ['clash', 'bombing', 'raid', 'shooting', 'clash', 'displacement'],
+            incidentRate: 600
+        },
+        {
+            name: "Sahel - Burkina Faso",
+            lat: 12.37, lng: -1.52,
+            severity: "high",
+            category: "insurgency",
+            region: "West Africa",
+            started: "2015",
+            parties: "Military junta vs JNIM, ISGS (Islamic State Greater Sahara)",
+            desc: "Jihadist groups control 40%+ of national territory. Armed forces struggle to protect civilians. Mass displacement spreading.",
+            impact: "Thousands killed annually. 2M+ displaced.",
+            casualties: { killed: 3800, wounded: 6500, displaced: 2100000, refugees: 95000 },
+            locations: ['Ouagadougou', 'Djibo', 'Soum', 'Sahel Region', 'Est Region', 'Nord Region'],
+            incidents: ['clash', 'raid', 'shooting', 'displacement', 'bombing', 'kidnapping'],
+            incidentRate: 700
+        },
+        {
+            name: "Nigeria - Multi-front Violence",
+            lat: 9.06, lng: 7.49,
+            severity: "high",
+            category: "insurgency",
+            region: "West Africa",
+            started: "2009 (Boko Haram phase)",
+            parties: "Nigerian military vs Boko Haram/ISWAP, bandits, separatists",
+            desc: "Multiple simultaneous security crises: Boko Haram/ISWAP in northeast, mass banditry in northwest, IPOB tensions in southeast.",
+            impact: "Tens of thousands killed. 3M+ displaced in northeast.",
+            casualties: { killed: 9500, wounded: 18000, displaced: 3200000, refugees: 340000 },
+            locations: ['Borno', 'Zamfara', 'Kaduna', 'Katsina', 'Niger State', 'Abuja', 'Plateau'],
+            incidents: ['shooting', 'kidnapping', 'clash', 'bombing', 'raid', 'kidnapping', 'shooting'],
+            incidentRate: 1100
+        },
+        {
+            name: "Ethiopia - Regional Conflicts",
+            lat: 9.02, lng: 38.75,
+            severity: "high",
+            category: "civil_war",
+            region: "East Africa",
+            started: "2020 (Tigray); ongoing regional",
+            parties: "Federal government, Amhara Fano militia, Oromo Liberation Army, various regional forces",
+            desc: "Post-Tigray instability. Amhara Fano militia in open conflict with federal forces. OLA insurgency in Oromia.",
+            impact: "Hundreds of thousands killed in Tigray war. Ongoing Amhara displacement.",
+            casualties: { killed: 620000, wounded: 450000, displaced: 4500000, refugees: 280000 },
+            locations: ['Amhara Region', 'Oromia', 'Addis Ababa', 'Tigray', 'Gondar', 'Bahir Dar', 'Wellega'],
+            incidents: ['clash', 'shooting', 'raid', 'displacement', 'clash', 'shelling'],
+            incidentRate: 850
+        },
+
+        // === MEDIUM ===
+        {
+            name: "Afghanistan - Taliban vs ISIS-K",
+            lat: 34.53, lng: 69.17,
+            severity: "medium",
+            category: "insurgency",
+            region: "South Asia",
+            started: "2021 (current phase)",
+            parties: "Taliban government vs ISIS-Khorasan, National Resistance Front",
+            desc: "ISIS-K conducts regular bombings targeting Taliban, minorities, and public spaces. NRF maintains low-level resistance.",
+            impact: "Hundreds killed in attacks annually. 23M+ in humanitarian need.",
+            casualties: { killed: 2400, wounded: 4800, displaced: 6800000, refugees: 2600000 },
+            locations: ['Kabul', 'Nangarhar', 'Kandahar', 'Herat', 'Kunduz', 'Panjshir', 'Balkh'],
+            incidents: ['bombing', 'shooting', 'clash', 'bombing', 'raid'],
+            incidentRate: 350
+        },
+        {
+            name: "Pakistan - TTP Insurgency",
+            lat: 33.73, lng: 70.45,
+            severity: "medium",
+            category: "insurgency",
+            region: "South Asia",
+            started: "2007 (resurgent 2021)",
+            parties: "Pakistani military vs TTP, Baloch separatist groups",
+            desc: "TTP attacks surged after Afghan Taliban takeover. BLA conducts separate insurgency. Military operations in KP and Balochistan.",
+            impact: "Thousands killed since TTP resurgence. Targeting of Chinese projects.",
+            casualties: { killed: 3100, wounded: 5400, displaced: 1200000, refugees: 0 },
+            locations: ['Waziristan', 'Balochistan', 'Peshawar', 'Quetta', 'Dera Ismail Khan', 'Swat'],
+            incidents: ['bombing', 'shooting', 'clash', 'raid', 'bombing'],
+            incidentRate: 400
+        },
+        {
+            name: "Haiti - Gang Violence",
+            lat: 18.54, lng: -72.34,
+            severity: "medium",
+            category: "drug_war",
+            region: "Caribbean",
+            started: "2021 (crisis phase)",
+            parties: "Armed gangs vs Haitian National Police, Kenyan-led MSS mission",
+            desc: "Armed gangs control ~80% of Port-au-Prince. State institutions collapsed. Kidnapping and sexual violence rampant.",
+            impact: "Thousands killed annually. 700,000+ displaced.",
+            casualties: { killed: 4600, wounded: 8200, displaced: 700000, refugees: 210000 },
+            locations: ['Port-au-Prince', 'Cite Soleil', 'Artibonite', 'Carrefour', 'Delmas', 'Croix-des-Bouquets'],
+            incidents: ['shooting', 'kidnapping', 'shooting', 'clash', 'shooting', 'kidnapping'],
+            incidentRate: 500
+        },
+        {
+            name: "Colombia - Armed Groups",
+            lat: 3.45, lng: -76.52,
+            severity: "medium",
+            category: "insurgency",
+            region: "South America",
+            started: "1964 (recurring)",
+            parties: "Colombian government vs ELN, FARC dissidents, drug trafficking groups",
+            desc: "FARC dissident factions and ELN remain active. Violence concentrated in Pacific coast, borders, and Catatumbo.",
+            impact: "Hundreds of conflict deaths annually. 5M+ cumulative displaced.",
+            casualties: { killed: 1800, wounded: 3200, displaced: 5200000, refugees: 480000 },
+            locations: ['Catatumbo', 'Cauca', 'Narino', 'Choco', 'Arauca', 'Cali', 'Buenaventura'],
+            incidents: ['clash', 'shooting', 'bombing', 'kidnapping', 'displacement'],
+            incidentRate: 300
+        },
+        {
+            name: "Syria - Post-War Instability",
+            lat: 34.80, lng: 38.99,
+            severity: "medium",
+            category: "civil_war",
+            region: "Middle East",
+            started: "2011",
+            parties: "HTS-led government, SDF/Kurdish forces, ISIS remnants, Turkish-backed factions",
+            desc: "Assad regime fell in late 2024. HTS governs but faces ISIS remnants, Kurdish autonomy demands, and internal fragmentation.",
+            impact: "500,000+ total war deaths. 6M+ refugees.",
+            casualties: { killed: 507000, wounded: 1200000, displaced: 6800000, refugees: 5500000 },
+            locations: ['Damascus', 'Aleppo', 'Idlib', 'Deir ez-Zor', 'Raqqa', 'Daraa', 'Hasaka'],
+            incidents: ['bombing', 'clash', 'shooting', 'drone', 'raid'],
+            incidentRate: 450
+        },
+        {
+            name: "Mexico - Cartel Violence",
+            lat: 23.63, lng: -102.55,
+            severity: "medium",
+            category: "drug_war",
+            region: "North America",
+            started: "2006",
+            parties: "Sinaloa Cartel factions, CJNG, other cartels vs military/security forces",
+            desc: "Cartel wars produce war-level casualties. Sinaloa fragmented after 2024 arrests. CJNG expansion continues.",
+            impact: "30,000+ homicides per year. 100,000+ missing.",
+            casualties: { killed: 31000, wounded: 42000, displaced: 380000, refugees: 0 },
+            locations: ['Sinaloa', 'Guerrero', 'Michoacan', 'Jalisco', 'Chihuahua', 'Tamaulipas', 'Guanajuato'],
+            incidents: ['shooting', 'shooting', 'kidnapping', 'clash', 'shooting', 'kidnapping'],
+            incidentRate: 650
+        },
+        {
+            name: "Sahel - Niger",
+            lat: 13.51, lng: 2.11,
+            severity: "medium",
+            category: "insurgency",
+            region: "West Africa",
+            started: "2015",
+            parties: "Military junta vs JNIM, ISGS",
+            desc: "Post-2023 coup, Niger joined Mali and Burkina Faso in expelling Western forces. Jihadist attacks spreading.",
+            impact: "Hundreds killed. 350,000+ displaced.",
+            casualties: { killed: 1400, wounded: 2800, displaced: 350000, refugees: 65000 },
+            locations: ['Niamey', 'Tillaberi', 'Diffa', 'Tahoua', 'Maradi', 'Agadez'],
+            incidents: ['clash', 'raid', 'bombing', 'shooting', 'displacement'],
+            incidentRate: 250
+        },
+        {
+            name: "Mozambique - Cabo Delgado",
+            lat: -12.35, lng: 40.35,
+            severity: "medium",
+            category: "insurgency",
+            region: "Southern Africa",
+            started: "2017",
+            parties: "Mozambican military, Rwandan forces vs ISIS-linked ASWJ",
+            desc: "ISIS-linked insurgency in gas-rich Cabo Delgado. Rwandan intervention stabilized key areas but insurgents shifted to new districts.",
+            impact: "4,000+ killed. 1M+ displaced.",
+            casualties: { killed: 4200, wounded: 6800, displaced: 1000000, refugees: 15000 },
+            locations: ['Mocimboa da Praia', 'Palma', 'Macomia', 'Mueda', 'Montepuez', 'Chiure'],
+            incidents: ['raid', 'clash', 'shooting', 'displacement', 'burning'],
+            incidentRate: 200
+        },
+
+        // === LOW ===
+        {
+            name: "Cameroon - Anglophone Crisis",
+            lat: 5.95, lng: 10.15,
+            severity: "low",
+            category: "political",
+            region: "Central Africa",
+            started: "2017",
+            parties: "Cameroonian military vs Ambazonia separatist groups",
+            desc: "Anglophone separatists seek independence. Government operations and separatist attacks create chronic insecurity.",
+            impact: "6,000+ killed. 700,000+ displaced.",
+            casualties: { killed: 6100, wounded: 12000, displaced: 700000, refugees: 80000 },
+            locations: ['Bamenda', 'Buea', 'Kumba', 'Mamfe', 'Kumbo', 'Nkambe'],
+            incidents: ['clash', 'shooting', 'raid', 'displacement'],
+            incidentRate: 150
+        },
+        {
+            name: "Iraq - ISIS Remnants",
+            lat: 34.47, lng: 43.48,
+            severity: "low",
+            category: "insurgency",
+            region: "Middle East",
+            started: "2017 (remnant phase)",
+            parties: "Iraqi security forces, PMF vs ISIS cells",
+            desc: "ISIS operates as low-level rural insurgency. Sleeper cells conduct ambushes, IEDs, and assassinations.",
+            impact: "Hundreds killed annually.",
+            casualties: { killed: 1200, wounded: 2400, displaced: 1200000, refugees: 260000 },
+            locations: ['Kirkuk', 'Diyala', 'Salahuddin', 'Anbar', 'Nineveh', 'Makhmour'],
+            incidents: ['bombing', 'shooting', 'clash', 'raid'],
+            incidentRate: 120
+        },
+        {
+            name: "Libya - Political Fragmentation",
+            lat: 32.90, lng: 13.18,
+            severity: "low",
+            category: "political",
+            region: "North Africa",
+            started: "2014",
+            parties: "Government of National Unity (Tripoli) vs Libyan National Army (Haftar, east)",
+            desc: "Rival governments. Militia control of key infrastructure. Elections repeatedly postponed.",
+            impact: "Periodic clashes. Human trafficking hub.",
+            casualties: { killed: 2200, wounded: 4500, displaced: 280000, refugees: 12000 },
+            locations: ['Tripoli', 'Benghazi', 'Misrata', 'Sirte', 'Sabha', 'Zawiya'],
+            incidents: ['clash', 'shooting', 'kidnapping'],
+            incidentRate: 80
+        },
+        {
+            name: "Armenia-Azerbaijan Tensions",
+            lat: 40.18, lng: 44.51,
+            severity: "low",
+            category: "territorial",
+            region: "Caucasus",
+            started: "2020 (current phase)",
+            parties: "Armenia vs Azerbaijan",
+            desc: "Post-2023 ethnic cleansing of Nagorno-Karabakh. Border demarcation disputes. Risk of renewed conflict.",
+            impact: "120,000+ ethnic Armenians displaced.",
+            casualties: { killed: 8500, wounded: 18000, displaced: 120000, refugees: 120000 },
+            locations: ['Nagorno-Karabakh', 'Syunik', 'Tavush', 'Nakhchivan border', 'Lachin'],
+            incidents: ['clash', 'shooting'],
+            incidentRate: 30
+        },
+        {
+            name: "Taiwan Strait Tensions",
+            lat: 24.15, lng: 120.67,
+            severity: "low",
+            category: "territorial",
+            region: "East Asia",
+            started: "Ongoing",
+            parties: "China (PRC) vs Taiwan (ROC), US security commitment",
+            desc: "Elevated military tensions with frequent PLA air and naval incursions. Risk of miscalculation.",
+            impact: "No active combat. Major flashpoint risk.",
+            casualties: { killed: 0, wounded: 0, displaced: 0, refugees: 0 },
+            locations: ['Taiwan Strait', 'Kinmen', 'Matsu', 'Penghu', 'Taipei'],
+            incidents: [],
+            incidentRate: 0
+        }
+    ];
+
+    // ==================== THREE.JS SETUP ====================
+    let scene, camera, renderer;
+    let globe, globeGroup;
+    let markerMeshes = [];
+    let raycaster = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+    let isDragging = false;
+    let dragMoved = false;
+    let previousMouseX = 0;
+    let previousMouseY = 0;
+    let targetRotationY = null;
+    let targetRotationX = null;
+    let animatingToTarget = false;
+    let activeFilter = 'all';
+    let activeSeverityFilters = new Set(['critical', 'high', 'medium', 'low']);
+    let clock = new THREE.Clock();
+    let hintDismissed = false;
+
+    // Particle system for incident simulations
+    let explosionParticles = [];
+    let smokeParticles = [];
+    const GLOBE_RADIUS = 5;
+
+    function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 13;
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        // Lights
+        scene.add(new THREE.AmbientLight(0x8899bb, 0.5));
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.3);
+        sunLight.position.set(5, 3, 5);
+        scene.add(sunLight);
+        const fillLight = new THREE.DirectionalLight(0x4488ff, 0.3);
+        fillLight.position.set(-5, -2, -3);
+        scene.add(fillLight);
+
+        // Globe group
+        globeGroup = new THREE.Group();
+        scene.add(globeGroup);
+
+        const geometry = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
+        const textureLoader = new THREE.TextureLoader();
+        const earthMaterial = new THREE.MeshPhongMaterial({
+            map: textureLoader.load('2k_earth_daymap.jpg'),
+            specularMap: textureLoader.load('2k_earth_specular_map.jpg'),
+            specular: new THREE.Color(0x222244),
+            shininess: 8,
+            bumpMap: textureLoader.load('2k_earth_daymap.jpg'),
+            bumpScale: 0.04
+        });
+        globe = new THREE.Mesh(geometry, earthMaterial);
+        globeGroup.add(globe);
+
+        // Clouds
+        const cloudsMat = new THREE.MeshPhongMaterial({
+            map: textureLoader.load('2k_earth_clouds.jpg'),
+            transparent: true, opacity: 0.25, depthWrite: false
+        });
+        const clouds = new THREE.Mesh(new THREE.SphereGeometry(GLOBE_RADIUS * 1.008, 64, 64), cloudsMat);
+        clouds.name = 'clouds';
+        globeGroup.add(clouds);
+
+        // Atmosphere glow
+        const atmosMat = new THREE.ShaderMaterial({
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vNormal;
+                void main() {
+                    float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5);
+                    gl_FragColor = vec4(0.3, 0.5, 1.0, 1.0) * intensity;
+                }
+            `,
+            side: THREE.BackSide, blending: THREE.AdditiveBlending, transparent: true
+        });
+        scene.add(new THREE.Mesh(new THREE.SphereGeometry(GLOBE_RADIUS * 1.04, 64, 64), atmosMat));
+
+        // Markers
+        createMarkers(GLOBE_RADIUS);
+
+        // Stars
+        const starsGeo = new THREE.BufferGeometry();
+        const verts = [];
+        for (let i = 0; i < 10000; i++) {
+            verts.push(
+                THREE.MathUtils.randFloatSpread(2000),
+                THREE.MathUtils.randFloatSpread(2000),
+                THREE.MathUtils.randFloatSpread(2000)
+            );
+        }
+        starsGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+        scene.add(new THREE.Points(starsGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.6, sizeAttenuation: true })));
+
+        // UI
+        buildLegend();
+        buildFilterBar();
+        buildConflictList();
+        startIncidentSimulation();
+        startTicker();
+
+        // Events
+        window.addEventListener('resize', onResize);
+        renderer.domElement.addEventListener('mousedown', onMouseDown);
+        renderer.domElement.addEventListener('mousemove', onMouseMove);
+        renderer.domElement.addEventListener('mouseup', onMouseUp);
+        renderer.domElement.addEventListener('mouseleave', onMouseUp);
+        renderer.domElement.addEventListener('wheel', onWheel, { passive: true });
+        renderer.domElement.addEventListener('click', onClick);
+        renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
+
+        animate();
+    }
+
+    function createMarkers(radius) {
+        markerMeshes = [];
+        conflicts.forEach((conflict, index) => {
+            const sev = SEVERITY[conflict.severity];
+            const pos = latLngToVector3(conflict.lat, conflict.lng, radius * 1.015);
+
+            const markerGeo = new THREE.SphereGeometry(sev.size, 16, 16);
+            const markerMat = new THREE.MeshBasicMaterial({ color: sev.color, transparent: true, opacity: 0.95 });
+            const marker = new THREE.Mesh(markerGeo, markerMat);
+            marker.position.copy(pos);
+            marker.userData = { conflict, index };
+
+            // Glow ring
+            const ringGeo = new THREE.RingGeometry(sev.size * 1.5, sev.size * 2.0, 32);
+            const ringMat = new THREE.MeshBasicMaterial({ color: sev.color, side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.lookAt(new THREE.Vector3(0, 0, 0));
+            marker.add(ring);
+
+            // Pulse ring
+            const pulseGeo = new THREE.RingGeometry(sev.size * 2.0, sev.size * 2.3, 32);
+            const pulseMat = new THREE.MeshBasicMaterial({ color: sev.color, side: THREE.DoubleSide, transparent: true, opacity: 0.0 });
+            const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+            pulse.lookAt(new THREE.Vector3(0, 0, 0));
+            pulse.name = 'pulse';
+            marker.add(pulse);
+
+            globeGroup.add(marker);
+            markerMeshes.push(marker);
+        });
+    }
+
+    function latLngToVector3(lat, lng, radius) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lng + 180) * (Math.PI / 180);
+        return new THREE.Vector3(
+            -radius * Math.sin(phi) * Math.cos(theta),
+            radius * Math.cos(phi),
+            radius * Math.sin(phi) * Math.sin(theta)
+        );
+    }
+
+    // ==================== INCIDENT SIMULATION ====================
+
+    function spawnExplosion(conflict) {
+        const basePos = latLngToVector3(
+            conflict.lat + (Math.random() - 0.5) * 2,
+            conflict.lng + (Math.random() - 0.5) * 2,
+            GLOBE_RADIUS * 1.02
+        );
+        const sev = SEVERITY[conflict.severity];
+        const count = conflict.severity === 'critical' ? 12 : conflict.severity === 'high' ? 8 : 5;
+
+        // Flash
+        const flashGeo = new THREE.SphereGeometry(0.15, 8, 8);
+        const flashMat = new THREE.MeshBasicMaterial({ color: 0xffaa44, transparent: true, opacity: 1.0 });
+        const flash = new THREE.Mesh(flashGeo, flashMat);
+        flash.position.copy(basePos);
+        globeGroup.add(flash);
+        explosionParticles.push({ mesh: flash, life: 0.3, maxLife: 0.3, type: 'flash', vel: new THREE.Vector3() });
+
+        // Burst particles
+        for (let i = 0; i < count; i++) {
+            const size = 0.02 + Math.random() * 0.03;
+            const geo = new THREE.SphereGeometry(size, 6, 6);
+            const color = Math.random() > 0.5 ? sev.color : 0xff6622;
+            const mat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.9 });
+            const particle = new THREE.Mesh(geo, mat);
+            particle.position.copy(basePos);
+
+            // Velocity outward from surface
+            const normal = basePos.clone().normalize();
+            const vel = new THREE.Vector3(
+                (Math.random() - 0.5) * 0.08,
+                (Math.random() - 0.5) * 0.08,
+                (Math.random() - 0.5) * 0.08
+            ).add(normal.multiplyScalar(0.04 + Math.random() * 0.06));
+
+            globeGroup.add(particle);
+            explosionParticles.push({
+                mesh: particle,
+                vel,
+                life: 0.8 + Math.random() * 0.8,
+                maxLife: 0.8 + Math.random() * 0.8,
+                type: 'particle'
+            });
+        }
+
+        // Rising smoke
+        for (let i = 0; i < 4; i++) {
+            const size = 0.04 + Math.random() * 0.04;
+            const geo = new THREE.SphereGeometry(size, 6, 6);
+            const mat = new THREE.MeshBasicMaterial({ color: 0x444444, transparent: true, opacity: 0.5 });
+            const smoke = new THREE.Mesh(geo, mat);
+            const offset = basePos.clone().normalize().multiplyScalar(0.05 * i);
+            smoke.position.copy(basePos).add(offset);
+
+            const normal = basePos.clone().normalize();
+            const vel = normal.multiplyScalar(0.015 + Math.random() * 0.01);
+
+            globeGroup.add(smoke);
+            smokeParticles.push({
+                mesh: smoke,
+                vel,
+                life: 2.0 + Math.random() * 1.5,
+                maxLife: 2.0 + Math.random() * 1.5,
+                type: 'smoke'
+            });
+        }
+    }
+
+    function updateParticles(dt) {
+        // Explosion particles
+        for (let i = explosionParticles.length - 1; i >= 0; i--) {
+            const p = explosionParticles[i];
+            p.life -= dt;
+            if (p.life <= 0) {
+                globeGroup.remove(p.mesh);
+                p.mesh.geometry.dispose();
+                p.mesh.material.dispose();
+                explosionParticles.splice(i, 1);
+                continue;
+            }
+            const t = p.life / p.maxLife;
+            p.mesh.material.opacity = t * (p.type === 'flash' ? 1.0 : 0.8);
+            if (p.type === 'flash') {
+                const s = 1.0 + (1.0 - t) * 2.0;
+                p.mesh.scale.set(s, s, s);
+            } else {
+                p.mesh.position.add(p.vel.clone().multiplyScalar(dt));
+                p.vel.multiplyScalar(0.97);
+            }
+        }
+
+        // Smoke
+        for (let i = smokeParticles.length - 1; i >= 0; i--) {
+            const p = smokeParticles[i];
+            p.life -= dt;
+            if (p.life <= 0) {
+                globeGroup.remove(p.mesh);
+                p.mesh.geometry.dispose();
+                p.mesh.material.dispose();
+                smokeParticles.splice(i, 1);
+                continue;
+            }
+            const t = p.life / p.maxLife;
+            p.mesh.material.opacity = t * 0.35;
+            const s = 1.0 + (1.0 - t) * 1.5;
+            p.mesh.scale.set(s, s, s);
+            p.mesh.position.add(p.vel.clone().multiplyScalar(dt));
+        }
+    }
+
+    // Schedule incident explosions
+    function startIncidentSimulation() {
+        conflicts.forEach(conflict => {
+            if (conflict.incidentRate <= 0) return;
+            // Map incidentRate/month to seconds between events (accelerated: 1 month = ~60 seconds)
+            const intervalSec = 60 / (conflict.incidentRate / 30) * 1000;
+            const minInterval = conflict.severity === 'critical' ? 800 : conflict.severity === 'high' ? 1500 : 3000;
+            const actualInterval = Math.max(minInterval, Math.min(intervalSec, 12000));
+
+            function scheduleNext() {
+                const jitter = actualInterval * (0.5 + Math.random());
+                setTimeout(() => {
+                    if (isConflictVisible(conflict)) {
+                        spawnExplosion(conflict);
+                    }
+                    scheduleNext();
+                }, jitter);
+            }
+            // Stagger initial spawn
+            setTimeout(scheduleNext, Math.random() * actualInterval);
+        });
+    }
+
+    // ==================== LIVE TICKER ====================
+    let tickerMessages = [];
+    let tickerIndex = 0;
+
+    function generateIncidentMessage(conflict) {
+        if (!conflict.incidents.length) return null;
+        const type = conflict.incidents[Math.floor(Math.random() * conflict.incidents.length)];
+        const incType = INCIDENT_TYPES[type];
+        if (!incType) return null;
+        const template = incType.templates[Math.floor(Math.random() * incType.templates.length)];
+        const loc = conflict.locations[Math.floor(Math.random() * conflict.locations.length)];
+        const n = Math.floor(50 + Math.random() * 500);
+        const text = template.replace('{loc}', loc).replace('{n}', n);
+        const casualties = conflict.severity === 'critical'
+            ? Math.floor(3 + Math.random() * 25)
+            : conflict.severity === 'high'
+            ? Math.floor(1 + Math.random() * 12)
+            : Math.floor(1 + Math.random() * 5);
+        const casualtyText = type === 'displacement' || type === 'kidnapping'
+            ? '' : ` — ${casualties} reported killed`;
+        return `${incType.icon} <strong>${conflict.name}:</strong> ${text}${casualtyText}`;
+    }
+
+    function startTicker() {
+        // Pre-generate messages
+        for (let i = 0; i < 40; i++) {
+            const conflict = conflicts.filter(c => c.incidentRate > 0)[Math.floor(Math.random() * conflicts.filter(c => c.incidentRate > 0).length)];
+            const msg = generateIncidentMessage(conflict);
+            if (msg) tickerMessages.push(msg);
+        }
+        updateTickerContent();
+
+        // Continuously add new messages
+        setInterval(() => {
+            const activeConflicts = conflicts.filter(c => c.incidentRate > 0 && isConflictVisible(c));
+            if (!activeConflicts.length) return;
+            const conflict = activeConflicts[Math.floor(Math.random() * activeConflicts.length)];
+            const msg = generateIncidentMessage(conflict);
+            if (msg) {
+                tickerMessages.push(msg);
+                if (tickerMessages.length > 60) tickerMessages.shift();
+                updateTickerContent();
+            }
+        }, 4000);
+    }
+
+    function updateTickerContent() {
+        const el = document.getElementById('ticker-content');
+        const separator = '&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;';
+        el.innerHTML = tickerMessages.slice(-20).join(separator);
+    }
+
+    // ==================== UI ====================
+    function buildLegend() {
+        const legend = document.getElementById('legend');
+        Object.entries(SEVERITY).forEach(([key, sev]) => {
+            const count = conflicts.filter(c => c.severity === key).length;
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            item.dataset.severity = key;
+            item.innerHTML = `<span class="legend-dot" style="background:${sev.cssColor}"></span>${sev.label} (${count})`;
+            item.onclick = () => {
+                if (activeSeverityFilters.has(key)) {
+                    activeSeverityFilters.delete(key);
+                    item.classList.add('dimmed');
+                } else {
+                    activeSeverityFilters.add(key);
+                    item.classList.remove('dimmed');
+                }
+                updateVisibility();
+                buildConflictList();
+            };
+            legend.appendChild(item);
+        });
+    }
+
+    function buildFilterBar() {
+        const bar = document.getElementById('filter-bar');
+        const allBtn = document.createElement('button');
+        allBtn.className = 'filter-btn active';
+        allBtn.textContent = 'All';
+        allBtn.onclick = () => setFilter('all');
+        bar.appendChild(allBtn);
+
+        [...new Set(conflicts.map(c => c.region))].sort().forEach(region => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.textContent = region;
+            btn.onclick = () => setFilter(region);
+            bar.appendChild(btn);
+        });
+    }
+
+    function setFilter(filter) {
+        activeFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent === (filter === 'all' ? 'All' : filter));
+        });
+        updateVisibility();
+        buildConflictList();
+    }
+
+    function isConflictVisible(conflict) {
+        return activeSeverityFilters.has(conflict.severity) && (activeFilter === 'all' || conflict.region === activeFilter);
+    }
+
+    function updateVisibility() {
+        markerMeshes.forEach(marker => {
+            marker.visible = isConflictVisible(marker.userData.conflict);
+        });
+    }
+
+    function buildConflictList() {
+        const list = document.getElementById('conflicts-list');
+        list.innerHTML = '';
+        const visible = conflicts.filter(isConflictVisible);
+
+        visible.forEach(conflict => {
+            const sev = SEVERITY[conflict.severity];
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span class="li-dot" style="background:${sev.cssColor}"></span>
+                <span class="li-name">${conflict.name}</span>
+                <span class="li-severity">${sev.label}</span>
+            `;
+            li.onclick = () => focusOnConflict(conflict, li);
+            list.appendChild(li);
+        });
+
+        document.getElementById('count-badge').textContent = `Showing ${visible.length} of ${conflicts.length} conflicts`;
+    }
+
+    function formatNumber(n) {
+        if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+        if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'K';
+        return n.toLocaleString();
+    }
+
+    function focusOnConflict(conflict, listItem) {
+        targetRotationY = -THREE.MathUtils.degToRad(conflict.lng) + 0.3;
+        targetRotationX = THREE.MathUtils.degToRad(conflict.lat * 0.35);
+        animatingToTarget = true;
+
+        document.querySelectorAll('#conflicts-list li').forEach(li => li.classList.remove('active'));
+        if (listItem) listItem.classList.add('active');
+
+        showInfoPanel(conflict);
+    }
+
+    function showInfoPanel(conflict) {
+        const sev = SEVERITY[conflict.severity];
+        document.getElementById('info-name').textContent = conflict.name;
+        const badge = document.getElementById('info-severity-badge');
+        badge.textContent = sev.label;
+        badge.style.background = sev.cssColor + '22';
+        badge.style.color = sev.cssColor;
+        document.getElementById('info-desc').textContent = conflict.desc;
+
+        // Stats grid
+        const stats = document.getElementById('info-stats');
+        const c = conflict.casualties;
+        stats.innerHTML = '';
+        if (c.killed > 0) stats.innerHTML += `<div class="stat-box"><div class="stat-value killed">${formatNumber(c.killed)}</div><div class="stat-label">Killed</div></div>`;
+        if (c.wounded > 0) stats.innerHTML += `<div class="stat-box"><div class="stat-value wounded">${formatNumber(c.wounded)}</div><div class="stat-label">Wounded</div></div>`;
+        if (c.displaced > 0) stats.innerHTML += `<div class="stat-box"><div class="stat-value displaced">${formatNumber(c.displaced)}</div><div class="stat-label">Displaced</div></div>`;
+        if (c.refugees > 0) stats.innerHTML += `<div class="stat-box"><div class="stat-value refugees">${formatNumber(c.refugees)}</div><div class="stat-label">Refugees</div></div>`;
+
+        document.getElementById('info-parties').innerHTML = `<strong>Parties:</strong> ${conflict.parties}`;
+        document.getElementById('info-impact').innerHTML = `<strong>Impact:</strong> <span>${conflict.impact}</span>`;
+        document.getElementById('info-started').innerHTML = `<strong>Started:</strong> <span>${conflict.started}</span>`;
+        document.getElementById('info-region').innerHTML = `<strong>Region:</strong> <span>${conflict.region} &middot; ${CATEGORIES[conflict.category] || conflict.category}</span>`;
+
+        // Incident feed
+        const feedDiv = document.getElementById('info-incidents');
+        if (conflict.incidents.length > 0) {
+            let html = '<div class="incident-feed-title">Recent Incident Reports (Simulated)</div>';
+            const now = new Date();
+            for (let i = 0; i < Math.min(6, conflict.incidents.length + 2); i++) {
+                const type = conflict.incidents[i % conflict.incidents.length];
+                const incType = INCIDENT_TYPES[type];
+                if (!incType) continue;
+                const loc = conflict.locations[Math.floor(Math.random() * conflict.locations.length)];
+                const template = incType.templates[Math.floor(Math.random() * incType.templates.length)];
+                const n = Math.floor(50 + Math.random() * 500);
+                const text = template.replace('{loc}', `<strong>${loc}</strong>`).replace('{n}', n);
+                const minsAgo = Math.floor(Math.random() * 180) + (i * 30);
+                const timeStr = minsAgo < 60 ? `${minsAgo}m` : `${Math.floor(minsAgo / 60)}h`;
+                html += `<div class="incident-item">
+                    <span class="incident-icon">${incType.icon}</span>
+                    <span class="incident-time">${timeStr} ago</span>
+                    <span class="incident-text">${text}</span>
+                </div>`;
+            }
+            feedDiv.innerHTML = html;
+        } else {
+            feedDiv.innerHTML = '<div class="incident-feed-title">No active incidents</div>';
+        }
+
+        document.getElementById('info').style.display = 'block';
+    }
+
+    // ==================== INTERACTION ====================
+    function dismissHint() {
+        if (!hintDismissed) {
+            hintDismissed = true;
+            document.getElementById('drag-hint').classList.add('hidden');
+            setTimeout(() => {
+                const el = document.getElementById('drag-hint');
+                if (el) el.style.display = 'none';
+            }, 1200);
+        }
+    }
+
+    function onMouseDown(e) {
+        if (e.button === 0) {
+            isDragging = true;
+            dragMoved = false;
+            previousMouseX = e.clientX;
+            previousMouseY = e.clientY;
+            animatingToTarget = false;
+            dismissHint();
+        }
+    }
+
+    function onMouseMove(e) {
+        if (!isDragging) return;
+        const deltaX = e.clientX - previousMouseX;
+        const deltaY = e.clientY - previousMouseY;
+        if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) dragMoved = true;
+
+        globeGroup.rotation.y += deltaX * 0.005;
+        globeGroup.rotation.x += deltaY * 0.005;
+        globeGroup.rotation.x = Math.max(-1.2, Math.min(1.2, globeGroup.rotation.x));
+
+        previousMouseX = e.clientX;
+        previousMouseY = e.clientY;
+    }
+
+    function onMouseUp() { isDragging = false; }
+
+    function onWheel(e) {
+        camera.position.z += e.deltaY * 0.012;
+        camera.position.z = Math.max(8, Math.min(camera.position.z, 25));
+        dismissHint();
+    }
+
+    let lastTouchDist = 0;
+    function onTouchStart(e) {
+        dismissHint();
+        if (e.touches.length === 1) {
+            isDragging = true;
+            dragMoved = false;
+            previousMouseX = e.touches[0].clientX;
+            previousMouseY = e.touches[0].clientY;
+            animatingToTarget = false;
+        } else if (e.touches.length === 2) {
+            lastTouchDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+        }
+        e.preventDefault();
+    }
+
+    function onTouchMove(e) {
+        if (e.touches.length === 1 && isDragging) {
+            const deltaX = e.touches[0].clientX - previousMouseX;
+            const deltaY = e.touches[0].clientY - previousMouseY;
+            if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) dragMoved = true;
+            globeGroup.rotation.y += deltaX * 0.005;
+            globeGroup.rotation.x += deltaY * 0.005;
+            globeGroup.rotation.x = Math.max(-1.2, Math.min(1.2, globeGroup.rotation.x));
+            previousMouseX = e.touches[0].clientX;
+            previousMouseY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+            const dist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            camera.position.z += (lastTouchDist - dist) * 0.03;
+            camera.position.z = Math.max(8, Math.min(camera.position.z, 25));
+            lastTouchDist = dist;
+        }
+        e.preventDefault();
+    }
+
+    function onTouchEnd() { isDragging = false; }
+
+    function onClick(e) {
+        if (dragMoved) return;
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+
+        const intersects = raycaster.intersectObjects(markerMeshes.filter(m => m.visible), true);
+        if (intersects.length > 0) {
+            let obj = intersects[0].object;
+            while (obj && !obj.userData.conflict) obj = obj.parent;
+            if (obj && obj.userData.conflict) {
+                const conflict = obj.userData.conflict;
+                showInfoPanel(conflict);
+                const listItems = document.querySelectorAll('#conflicts-list li');
+                listItems.forEach(li => li.classList.remove('active'));
+                const idx = conflicts.filter(isConflictVisible).indexOf(conflict);
+                if (idx >= 0 && listItems[idx]) listItems[idx].classList.add('active');
+            }
+        }
+    }
+
+    function onResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // ==================== ANIMATION ====================
+    let lastTime = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+        const dt = Math.min(elapsed - lastTime, 0.05);
+        lastTime = elapsed;
+
+        // Smooth rotation to target (from clicking a conflict in the list)
+        if (animatingToTarget && targetRotationY !== null) {
+            globeGroup.rotation.y += (targetRotationY - globeGroup.rotation.y) * 0.06;
+            globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.06;
+            if (Math.abs(targetRotationY - globeGroup.rotation.y) < 0.005) {
+                animatingToTarget = false;
+            }
+        }
+
+        // NO auto-rotation — globe is static until user interacts
+
+        // Cloud drift (very subtle)
+        const clouds = globeGroup.getObjectByName('clouds');
+        if (clouds) clouds.rotation.y += 0.00005;
+
+        // Pulse animation on markers
+        markerMeshes.forEach((marker, i) => {
+            if (!marker.visible) return;
+            const pulse = marker.getObjectByName('pulse');
+            if (pulse) {
+                const phase = (elapsed * 1.5 + i * 0.7) % 2.0;
+                const scale = 1.0 + phase * 0.8;
+                pulse.scale.set(scale, scale, 1);
+                pulse.material.opacity = Math.max(0, 0.35 * (1.0 - phase / 2.0));
+            }
+        });
+
+        // Update explosion/smoke particles
+        updateParticles(dt);
+
+        renderer.render(scene, camera);
+    }
+
+    // Start
+    init();
+    </script>
+</body>
+</html>

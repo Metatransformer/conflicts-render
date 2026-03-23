@@ -1,0 +1,15 @@
+[
+  { "fromLat": 15.50, "fromLng": 32.56, "toLat": 13.45, "toLng": 18.73, "conflictId": "sudan-civil-war", "population": 420000, "destinationCountry": "Chad", "label": "Sudan → Chad (420K)", "year": 2024 },
+  { "fromLat": 15.50, "fromLng": 32.56, "toLat": 30.04, "toLng": 31.24, "conflictId": "sudan-civil-war", "population": 500000, "destinationCountry": "Egypt", "label": "Sudan → Egypt (500K)", "year": 2024 },
+  { "fromLat": 15.50, "fromLng": 32.56, "toLat": 4.85, "toLng": 31.60, "conflictId": "sudan-civil-war", "population": 620000, "destinationCountry": "South Sudan", "label": "Sudan → South Sudan (620K)", "year": 2024 },
+  { "fromLat": 48.38, "fromLng": 35.04, "toLat": 51.92, "toLng": 19.15, "conflictId": "russia-ukraine-war", "population": 1600000, "destinationCountry": "Poland", "label": "Ukraine → Poland (1.6M)", "year": 2022 },
+  { "fromLat": 48.38, "fromLng": 35.04, "toLat": 51.17, "toLng": 10.45, "conflictId": "russia-ukraine-war", "population": 1100000, "destinationCountry": "Germany", "label": "Ukraine → Germany (1.1M)", "year": 2022 },
+  { "fromLat": 48.38, "fromLng": 35.04, "toLat": 49.82, "toLng": 15.47, "conflictId": "russia-ukraine-war", "population": 380000, "destinationCountry": "Czech Republic", "label": "Ukraine → Czechia (380K)", "year": 2022 },
+  { "fromLat": 31.42, "fromLng": 34.35, "toLat": 30.04, "toLng": 31.24, "conflictId": "gaza-israel-palestine", "population": 100000, "destinationCountry": "Egypt", "label": "Gaza → Egypt (100K)", "year": 2024 },
+  { "fromLat": 19.76, "fromLng": 96.08, "toLat": 15.87, "toLng": 100.99, "conflictId": "myanmar-civil-war", "population": 92000, "destinationCountry": "Thailand", "label": "Myanmar → Thailand (92K)", "year": 2024 },
+  { "fromLat": 19.76, "fromLng": 96.08, "toLat": 23.68, "toLng": 90.36, "conflictId": "myanmar-civil-war", "population": 960000, "destinationCountry": "Bangladesh", "label": "Myanmar → Bangladesh (960K Rohingya)", "year": 2017 },
+  { "fromLat": -1.66, "fromLng": 29.22, "toLat": -1.94, "toLng": 29.87, "conflictId": "dr-congo-eastern", "population": 530000, "destinationCountry": "Uganda", "label": "DRC → Uganda (530K)", "year": 2024 },
+  { "fromLat": 34.80, "fromLng": 38.99, "toLat": 38.96, "toLng": 35.24, "conflictId": "syria-post-war", "population": 3500000, "destinationCountry": "Turkey", "label": "Syria → Turkey (3.5M)", "year": 2015 },
+  { "fromLat": 34.80, "fromLng": 38.99, "toLat": 31.95, "toLng": 35.93, "conflictId": "syria-post-war", "population": 660000, "destinationCountry": "Jordan", "label": "Syria → Jordan (660K)", "year": 2015 },
+  { "fromLat": 15.35, "fromLng": 44.21, "toLat": 11.59, "toLng": 43.15, "conflictId": "yemen-civil-war", "population": 35000, "destinationCountry": "Djibouti", "label": "Yemen → Djibouti (35K)", "year": 2023 }
+]

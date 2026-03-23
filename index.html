@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Conflicts Globe</title>
+  <meta name="description" content="Interactive 3D globe visualization of active armed conflicts worldwide. Educational tool with real data from ACLED.">
+  <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+  <div id="loading">
+    <div class="loading-globe"></div>
+    <p class="loading-text">Loading World Conflicts Globe&hellip;</p>
+  </div>
+
+  <div id="app" class="hidden">
+    <div id="sidebar">
+      <h1>World Conflicts Globe</h1>
+      <p class="subtitle" id="subtitle"></p>
+
+      <div id="legend" class="legend"></div>
+      <div id="filter-bar" class="filter-bar"></div>
+
+      <ul id="conflicts-list"></ul>
+      <div class="count-badge" id="count-badge"></div>
+
+      <div class="sidebar-actions">
+        <button id="btn-export-csv" class="action-btn" title="Export CSV">Export CSV</button>
+        <button id="btn-export-json" class="action-btn" title="Export JSON">Export JSON</button>
+        <button id="btn-a11y" class="action-btn" title="Color-blind mode">A11y</button>
+        <button id="btn-print" class="action-btn" title="Print view" onclick="window.print()">Print</button>
+      </div>
+    </div>
+
+    <div id="globe-container"></div>
+
+    <div id="info-panel" class="hidden">
+      <button id="info-close" aria-label="Close detail panel">&times;</button>
+      <h2 id="info-name"></h2>
+      <span id="info-severity-badge" class="severity-badge"></span>
+      <p id="info-desc"></p>
+      <div id="info-stats" class="stats-grid"></div>
+      <div id="info-parties" class="info-meta"></div>
+      <div id="info-impact" class="info-meta"></div>
+      <div id="info-started" class="info-meta"></div>
+      <div id="info-region" class="info-meta"></div>
+      <div id="info-context"></div>
+    </div>
+
+    <div id="comparison-panel" class="hidden"></div>
+
+    <div id="time-controls">
+      <button id="time-prev" aria-label="Previous month">&laquo;</button>
+      <input type="range" id="time-slider" min="0" max="100" value="100">
+      <span id="time-label"></span>
+      <button id="time-next" aria-label="Next month">&raquo;</button>
+      <button id="time-play" aria-label="Auto-play">&#9654;</button>
+    </div>
+
+    <div id="mobile-time" class="hidden">
+      <button id="mobile-time-prev">&laquo;</button>
+      <span id="mobile-time-label"></span>
+      <button id="mobile-time-next">&raquo;</button>
+    </div>
+
+    <footer id="footer">
+      <span>Data: <a href="https://acleddata.com" target="_blank" rel="noopener">ACLED</a> · <a href="https://www.unhcr.org/refugee-statistics/" target="_blank" rel="noopener">UNHCR</a></span>
+      <span id="data-freshness"></span>
+    </footer>
+
+    <div id="freshness-banner" class="hidden">
+      <span id="freshness-message"></span>
+      <button id="freshness-dismiss" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
+
+  <div id="onboarding" class="hidden">
+    <div class="onboarding-content">
+      <h2>World Conflicts Globe</h2>
+      <p>An interactive visualization of active armed conflicts worldwide.</p>
+      <ul>
+        <li><strong>Drag</strong> to rotate the globe</li>
+        <li><strong>Scroll</strong> to zoom in and out</li>
+        <li><strong>Click</strong> markers or list items for details</li>
+        <li><strong>Shift+Click</strong> a second conflict to compare</li>
+        <li>Use the <strong>timeline</strong> below to explore history</li>
+      </ul>
+      <button id="onboarding-dismiss" class="primary-btn">Explore the Globe</button>
+    </div>
+  </div>
+
+  <div id="webgl-fallback" class="hidden">
+    <img src="/public/2k_earth_daymap.jpg" alt="World map showing conflict locations" class="fallback-map">
+    <p>Your browser doesn't support 3D graphics. Use the conflict list on the left to explore.</p>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
