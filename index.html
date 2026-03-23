@@ -66,7 +66,16 @@
     <footer id="footer">
       <span>Data: <a href="https://acleddata.com" target="_blank" rel="noopener">ACLED</a> · <a href="https://www.unhcr.org/refugee-statistics/" target="_blank" rel="noopener">UNHCR</a></span>
       <span id="data-freshness"></span>
+      <span>by <a href="https://metatransformer.com" target="_blank" rel="noopener">metatransformer.com</a> · <a href="#" id="disclaimer-link">Disclaimer</a></span>
     </footer>
+
+    <div id="disclaimer-modal" class="hidden">
+      <div class="disclaimer-content">
+        <button id="disclaimer-close" aria-label="Close disclaimer">&times;</button>
+        <h3>Disclaimer</h3>
+        <p>This visualization is for educational purposes only. Conflict data is sourced from publicly available datasets (ACLED, UNHCR) and may not reflect the most current situation on the ground. The classification of events, severity levels, and boundaries shown does not imply any political opinion or endorsement. For authoritative information, please refer to the original data sources.</p>
+      </div>
+    </div>
 
     <div id="freshness-banner" class="hidden">
       <span id="freshness-message"></span>

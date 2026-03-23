@@ -181,4 +181,18 @@ function restoreState(conflicts: Conflict[]): void {
   }
 }
 
+// Disclaimer modal
+document.getElementById('disclaimer-link')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('disclaimer-modal')?.classList.remove('hidden');
+});
+document.getElementById('disclaimer-close')?.addEventListener('click', () => {
+  document.getElementById('disclaimer-modal')?.classList.add('hidden');
+});
+document.getElementById('disclaimer-modal')?.addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) {
+    document.getElementById('disclaimer-modal')?.classList.add('hidden');
+  }
+});
+
 main();
