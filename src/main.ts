@@ -23,7 +23,7 @@ async function main() {
         onConflictClick: handleConflictClick,
         onFilterChange: handleFilterChange,
       });
-      document.getElementById('app')!.classList.remove('hidden');
+      document.getElementById('globe-container')!.classList.add('hidden');
       document.getElementById('sidebar')!.style.position = 'static';
       document.getElementById('sidebar')!.style.width = '100%';
     } catch { /* fallback mode - just show the image */ }
@@ -91,8 +91,6 @@ async function main() {
     const loading = document.getElementById('loading')!;
     loading.classList.add('fade-out');
     setTimeout(() => loading.classList.add('hidden'), 1000);
-
-    document.getElementById('app')!.classList.remove('hidden');
 
     // Show onboarding for first-time visitors
     if (!localStorage.getItem('onboarding-seen')) {

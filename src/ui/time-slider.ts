@@ -25,11 +25,12 @@ export function initTimeSlider(conflicts: Conflict[], cb: (month: string | null)
     return;
   }
 
-  currentIndex = months.length - 1;
+  // Extra position at the end = "All time" (null month)
+  currentIndex = months.length; // "All" position
 
   const slider = document.getElementById('time-slider') as HTMLInputElement;
   slider.min = '0';
-  slider.max = String(months.length - 1);
+  slider.max = String(months.length); // includes "All" at end
   slider.value = String(currentIndex);
   slider.oninput = () => {
     currentIndex = parseInt(slider.value, 10);
@@ -49,21 +50,27 @@ export function initTimeSlider(conflicts: Conflict[], cb: (month: string | null)
 }
 
 function step(delta: number): void {
-  currentIndex = Math.max(0, Math.min(months.length - 1, currentIndex + delta));
+  currentIndex = Math.max(0, Math.min(months.length, currentIndex + delta));
   (document.getElementById('time-slider') as HTMLInputElement).value = String(currentIndex);
   updateLabels();
   debouncedChange();
 }
 
+function getCurrentMonthValue(): string | null {
+  if (currentIndex >= months.length) return null; // "All time"
+  return months[currentIndex] || null;
+}
+
 function debouncedChange(): void {
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
-    onChange?.(months[currentIndex] || null);
+    onChange?.(getCurrentMonthValue());
   }, 100);
 }
 
 function updateLabels(): void {
-  const label = months[currentIndex] ? formatMonth(months[currentIndex]) : 'All time';
+  const monthVal = getCurrentMonthValue();
+  const label = monthVal ? formatMonth(monthVal) : 'All time';
   document.getElementById('time-label')!.textContent = label;
   document.getElementById('mobile-time-label')!.textContent = label;
 }
@@ -75,7 +82,7 @@ function togglePlay(): void {
     btn.innerHTML = '&#9646;&#9646;';
     btn.setAttribute('aria-label', 'Pause auto-play');
     playInterval = setInterval(() => {
-      if (currentIndex >= months.length - 1) {
+      if (currentIndex >= months.length) {
         currentIndex = 0;
       } else {
         currentIndex++;
@@ -93,5 +100,5 @@ function togglePlay(): void {
 }
 
 export function getCurrentMonth(): string | null {
-  return months[currentIndex] || null;
+  return getCurrentMonthValue();
 }

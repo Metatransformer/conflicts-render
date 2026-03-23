@@ -8,10 +8,10 @@ export const CategoryEnum = z.enum([
 ]);
 
 export const SEVERITY_CONFIG = {
-  critical: { color: '#ff2244', glColor: 0xff2244, label: 'Critical', size: 0.55, shape: '●' },
-  high:     { color: '#ff8800', glColor: 0xff8800, label: 'High',     size: 0.45, shape: '◆' },
-  medium:   { color: '#ffcc00', glColor: 0xffcc00, label: 'Medium',   size: 0.35, shape: '▲' },
-  low:      { color: '#66aaff', glColor: 0x66aaff, label: 'Low',      size: 0.28, shape: '■' },
+  critical: { color: '#ff2244', glColor: 0xff2244, label: 'Critical', size: 4.0, shape: '●' },
+  high:     { color: '#ff8800', glColor: 0xff8800, label: 'High',     size: 3.0, shape: '◆' },
+  medium:   { color: '#ffcc00', glColor: 0xffcc00, label: 'Medium',   size: 2.2, shape: '▲' },
+  low:      { color: '#66aaff', glColor: 0x66aaff, label: 'Low',      size: 1.5, shape: '■' },
 } as const;
 
 export const CATEGORY_LABELS: Record<string, string> = {

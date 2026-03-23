@@ -19,8 +19,8 @@ export function initGlobe(
   onReady: () => void,
 ): GlobeInstance {
   globe = new Globe(container)
-    .globeImageUrl('/public/2k_earth_daymap.jpg')
-    .bumpImageUrl('/public/2k_earth_daymap.jpg')
+    .globeImageUrl('./2k_earth_daymap.jpg')
+    .bumpImageUrl('./2k_earth_daymap.jpg')
     .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
     .showAtmosphere(true)
     .atmosphereColor('#3a75c4')
@@ -29,7 +29,7 @@ export function initGlobe(
     .pointLat((d: object) => (d as Conflict).lat)
     .pointLng((d: object) => (d as Conflict).lng)
     .pointColor((d: object) => SEVERITY_CONFIG[(d as Conflict).severity].color)
-    .pointAltitude(0.01)
+    .pointAltitude(0.06)
     .pointRadius((d: object) => SEVERITY_CONFIG[(d as Conflict).severity].size)
     .pointLabel((d: object) => {
       const c = d as Conflict;
