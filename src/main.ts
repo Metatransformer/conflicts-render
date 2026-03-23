@@ -5,32 +5,15 @@ import { initSidebar, buildConflictList, getVisibleConflicts, setActiveListItem,
 import { showInfoPanel, hideInfoPanel, showComparison } from './ui/info-panel';
 import { initTimeSlider } from './ui/time-slider';
 import { exportCSV, exportJSON, updateExportButtons } from './ui/export';
-import { decodeState, pushState, type AppState } from './state';
+import { decodeState, pushState } from './state';
 import { type Conflict } from './schema';
 
 let selectedConflict: Conflict | null = null;
 let compareConflict: Conflict | null = null;
+const hasWebGL = checkWebGL();
 
 async function main() {
-  // Check WebGL
-  if (!checkWebGL()) {
-    document.getElementById('loading')!.classList.add('hidden');
-    document.getElementById('webgl-fallback')!.classList.remove('hidden');
-    // Still load data for the sidebar
-    try {
-      const conflicts = await loadConflicts();
-      initSidebar(conflicts, {
-        onConflictClick: handleConflictClick,
-        onFilterChange: handleFilterChange,
-      });
-      document.getElementById('globe-container')!.classList.add('hidden');
-      document.getElementById('sidebar')!.style.position = 'static';
-      document.getElementById('sidebar')!.style.width = '100%';
-    } catch { /* fallback mode - just show the image */ }
-    return;
-  }
-
-  // Load data
+  // Load data first (needed for both WebGL and fallback)
   let conflicts: Conflict[];
   try {
     conflicts = await loadConflicts();
@@ -45,7 +28,9 @@ async function main() {
 
   await loadArcs();
 
-  // Set subtitle with date
+  // ── Shared setup (works in both WebGL and fallback mode) ──
+
+  // Set subtitle
   const lastUpdated = conflicts[0]?.lastUpdated;
   const subtitle = document.getElementById('subtitle')!;
   subtitle.textContent = lastUpdated
@@ -84,28 +69,6 @@ async function main() {
     handleFilterChange();
   });
 
-  // Init globe
-  const container = document.getElementById('globe-container')!;
-  initGlobe(container, conflicts, handleConflictClick, () => {
-    // Globe ready — hide loading, show app
-    const loading = document.getElementById('loading')!;
-    loading.classList.add('fade-out');
-    setTimeout(() => loading.classList.add('hidden'), 1000);
-
-    // Show onboarding for first-time visitors
-    if (!localStorage.getItem('onboarding-seen')) {
-      const onboarding = document.getElementById('onboarding')!;
-      onboarding.classList.remove('hidden');
-      document.getElementById('onboarding-dismiss')!.onclick = () => {
-        onboarding.classList.add('hidden');
-        localStorage.setItem('onboarding-seen', '1');
-      };
-    }
-
-    // Restore state from URL
-    restoreState(conflicts);
-  });
-
   // Export buttons
   document.getElementById('btn-export-csv')!.onclick = () => exportCSV(getVisibleConflicts(conflicts));
   document.getElementById('btn-export-json')!.onclick = () => exportJSON(getVisibleConflicts(conflicts));
@@ -115,7 +78,7 @@ async function main() {
     hideInfoPanel();
     selectedConflict = null;
     compareConflict = null;
-    updateArcs([]);
+    if (hasWebGL) updateArcs([]);
   };
 
   // Keyboard shortcuts
@@ -125,9 +88,47 @@ async function main() {
       document.getElementById('comparison-panel')!.classList.add('hidden');
       selectedConflict = null;
       compareConflict = null;
-      updateArcs([]);
+      if (hasWebGL) updateArcs([]);
     }
   });
+
+  // ── Mode-specific setup ──
+
+  if (!hasWebGL) {
+    // Fallback mode: no globe, just sidebar + flat map image
+    document.getElementById('loading')!.classList.add('hidden');
+    document.getElementById('webgl-fallback')!.classList.remove('hidden');
+    document.getElementById('globe-container')!.classList.add('hidden');
+    document.getElementById('sidebar')!.style.position = 'static';
+    document.getElementById('sidebar')!.style.width = '100%';
+
+    // Show onboarding for first-time visitors (even in fallback)
+    showOnboarding();
+    return;
+  }
+
+  // WebGL mode: full globe experience
+  const container = document.getElementById('globe-container')!;
+  initGlobe(container, conflicts, handleConflictClick, () => {
+    // Globe ready — hide loading
+    const loading = document.getElementById('loading')!;
+    loading.classList.add('fade-out');
+    setTimeout(() => loading.classList.add('hidden'), 1000);
+
+    showOnboarding();
+    restoreState(conflicts);
+  });
+}
+
+function showOnboarding(): void {
+  if (!localStorage.getItem('onboarding-seen')) {
+    const onboarding = document.getElementById('onboarding')!;
+    onboarding.classList.remove('hidden');
+    document.getElementById('onboarding-dismiss')!.onclick = () => {
+      onboarding.classList.add('hidden');
+      localStorage.setItem('onboarding-seen', '1');
+    };
+  }
 }
 
 function handleConflictClick(conflict: Conflict, el?: HTMLElement): void {
@@ -135,21 +136,23 @@ function handleConflictClick(conflict: Conflict, el?: HTMLElement): void {
   if (selectedConflict && (window.event as MouseEvent)?.shiftKey && selectedConflict.id !== conflict.id) {
     compareConflict = conflict;
     showComparison(selectedConflict, compareConflict);
-    updateArcs([]);
+    if (hasWebGL) updateArcs([]);
     return;
   }
 
   selectedConflict = conflict;
   compareConflict = null;
 
-  focusOnConflict(conflict);
+  if (hasWebGL) focusOnConflict(conflict);
   showInfoPanel(conflict);
 
   if (el) setActiveListItem(el);
 
-  // Show arcs for this conflict
-  const arcs = getArcsForConflict(conflict.id);
-  updateArcs(arcs);
+  // Show arcs for this conflict (WebGL only)
+  if (hasWebGL) {
+    const arcs = getArcsForConflict(conflict.id);
+    updateArcs(arcs);
+  }
 
   // Update URL state
   pushState({
@@ -164,7 +167,7 @@ function handleFilterChange(): void {
   const conflicts = getConflicts();
   const visible = getVisibleConflicts(conflicts);
   buildConflictList(conflicts);
-  updatePoints(visible);
+  if (hasWebGL) updatePoints(visible);
   updateExportButtons(visible);
 }
 
